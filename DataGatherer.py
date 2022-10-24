@@ -3,6 +3,7 @@ from pandas import DataFrame
 import os.path as path
 import json
 import pathlib
+import glob
 
 DATA_PATH = path.join("data", "DataReplay_1416", "VeReMi_50400_54000_2022-9-11_19.11.57", "VeReMi_50400_54000_2022-9-11_19_11_57")
 GROUND_TRUTH_FILENAME = "traceGroundTruthJSON-14.json"
@@ -32,6 +33,21 @@ def gatherData(dataPath, groundTruthFileName, refinedDataPath, refinedDataFileNa
     return dataframeData
 
 
+def filterGroundTruthPath(pathname):
+    return not ("groundtruth" in pathname.lower())
 
 if (__name__ == "__main__"):
-    print(gatherData(DATA_PATH, GROUND_TRUTH_FILENAME, REFINDED_DATA_PATH, RAW_FILE_NAME).head())
+    groundTruthData = gatherData(DATA_PATH, GROUND_TRUTH_FILENAME, REFINDED_DATA_PATH, RAW_FILE_NAME)
+
+    dataFiles = glob.glob(DATA_PATH + "/*.json")
+    filteredFiles = list(filter(filterGroundTruthPath, dataFiles))
+
+    testFiles = []
+
+    for file in filteredFiles:
+        testFiles.append(gatherData(path.dirname(file), path.basename(file), REFINDED_DATA_PATH, path.basename(file).replace(".json", ".csv")))
+
+    for testFile in testFiles:
+        print(testFile.head())
+
+
