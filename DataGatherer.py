@@ -5,49 +5,32 @@ import json
 import pathlib
 import glob
 
-DATA_PATH = path.join("data", "DataReplay_1416", "VeReMi_50400_54000_2022-9-11_19.11.57", "VeReMi_50400_54000_2022-9-11_19_11_57")
-GROUND_TRUTH_FILENAME = "traceGroundTruthJSON-14.json"
-REFINDED_DATA_PATH = path.join("data", "refinedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
-RAW_FILE_NAME= "rawdata.csv"
 
-def gatherData(dataPath, groundTruthFileName, refinedDataPath, refinedDataFileName) -> DataFrame:
-    pathlib.Path(refinedDataPath).mkdir(parents=True, exist_ok=True)
-    refinedDataFilePath = path.join(refinedDataPath, refinedDataFileName)
+class DataGatherer:
+    DATA_PATH = path.join("data", "DataReplay_1416", "VeReMi_50400_54000_2022-9-11_19.11.57", "VeReMi_50400_54000_2022-9-11_19_11_57")
+    GROUND_TRUTH_FILENAME = "traceGroundTruthJSON-14.json"
+    REFINED_DATA_PATH = path.join("data", "refinedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
+    RAW_FILE_NAME= "groundtruth.csv"
 
-    if(path.isfile(refinedDataFilePath)):
-        return pd.read_csv(refinedDataFilePath)
+    @staticmethod
+    def gatherData(dataPath, groundTruthFileName, refinedDataPath, refinedDataFileName) -> DataFrame:
+        pathlib.Path(refinedDataPath).mkdir(parents=True, exist_ok=True)
+        refinedDataFilePath = path.join(refinedDataPath, refinedDataFileName)
+
+        if(path.isfile(refinedDataFilePath)):
+            return pd.read_csv(refinedDataFilePath)
 
 
-    groundTruthFile = open(path.join(dataPath, groundTruthFileName), "r")
-    newData = groundTruthFile.readline()
-
-    fileData = []
-
-    while len(newData) > 0:
-        fileData.append(json.loads(newData))
+        groundTruthFile = open(path.join(dataPath, groundTruthFileName), "r")
         newData = groundTruthFile.readline()
 
-    dataframeData = DataFrame.from_records(fileData)
-    dataframeData.to_csv(refinedDataFilePath)
+        fileData = []
 
-    return dataframeData
+        while len(newData) > 0:
+            fileData.append(json.loads(newData))
+            newData = groundTruthFile.readline()
 
+        dataframeData = DataFrame.from_records(fileData)
+        dataframeData.to_csv(refinedDataFilePath, index=False)
 
-def filterGroundTruthPath(pathname):
-    return not ("groundtruth" in pathname.lower())
-
-if (__name__ == "__main__"):
-    groundTruthData = gatherData(DATA_PATH, GROUND_TRUTH_FILENAME, REFINDED_DATA_PATH, RAW_FILE_NAME)
-
-    dataFiles = glob.glob(DATA_PATH + "/*.json")
-    filteredFiles = list(filter(filterGroundTruthPath, dataFiles))
-
-    testFiles = []
-
-    for file in filteredFiles:
-        testFiles.append(gatherData(path.dirname(file), path.basename(file), REFINDED_DATA_PATH, path.basename(file).replace(".json", ".csv")))
-
-    for testFile in testFiles:
-        print(testFile.head())
-
-
+        return dataframeData

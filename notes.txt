@@ -1,0 +1,27 @@
+[10-28 11:16 a.m.] Arunita Jaekel
+traceJSON-9-7-A0-25202-7.json
+
+[10-28 11:18 a.m.] Arunita Jaekel
+traceJSON-15-13-A11-25207-7
+
+[10-28 11:18 a.m.] Aaron Collins
+A0 means legitimate
+
+[10-28 11:18 a.m.] Aaron Collins
+Anything else represents the type of attack
+
+[10-28 11:19 a.m.] Aaron Collins
+First num is the receiver ID (type 3 messages are those received from others)
+
+[10-28 11:19 a.m.] Aaron Collins
+Receiver id means this is the car’s ID (vehicle 9)
+
+[10-28 11:20 a.m.] Aaron Collins
+For example: vehicle 9 is not an attacker because it is A0
+
+[10-28 11:20 a.m.] Aaron Collins
+Vehicle 15 is doing some type of attack because it is not A0 (11 is a type of attack)
+
+[10-28 11:32 a.m.] Aaron Collins
+No noise (maybe try with?), no Z, no senderID and no senderpseudo
+
