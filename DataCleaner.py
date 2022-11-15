@@ -13,6 +13,7 @@ class DataCleaner:
 
     POPULATED_DATA_PATH = path.join("data", "populatedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
     CLEANED_DATA_PATH = path.join("data", "cleanedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
+    MERGED_CLEANED_DATA_FILE = path.join(CLEANED_DATA_PATH, "mergedData.csv")
     IS_ATTACKER_DATA_PATH = path.join("data", "isAttacker", "VeReMi_50400_54000_2022-9-11_19.11.57")
     IS_ATTACKER_DATA_FILE = path.join(IS_ATTACKER_DATA_PATH, "isattacker.txt")
 
@@ -22,6 +23,7 @@ class DataCleaner:
         maliciousFilesIDs = DataCleaner.getMaliciousFiles()
 
         df.drop(df[df['type'] == 2].index, inplace=True)
+        df.reset_index(inplace=True)
         df['receiverID'] = fileName.split("-")[1]
         try:
             df["isAttacker"] = np.where(df["sender"].astype(int).isin(maliciousFilesIDs), True, False)
@@ -68,15 +70,19 @@ class DataCleaner:
             # print(e)
             hedDf = DataFrame(df["hed"].to_list(), columns=["hedX", "hedY", "hedZ"])
 
-
+        df.reset_index(inplace=True)
         posDf.drop("posZ", axis=1, inplace=True)
         df = df.join(posDf)
+        # df = pd.merge(df, posDf, left_index=True)
         spdDf.drop("spdZ", axis=1, inplace=True)
         df = df.join(spdDf)
+        # df = pd.merge(df, spdDf, left_index=True)
         aclDf.drop("aclZ", axis=1, inplace=True)
         df = df.join(aclDf)
+        # df = pd.merge(df, aclDf, left_index=True)
         hedDf.drop("hedZ", axis=1, inplace=True)
         df = df.join(hedDf)
+        # df = pd.merge(df, hedDf, left_index=True)
 
         df.drop("pos", axis=1, inplace=True)
         df.drop("spd", axis=1, inplace=True)
@@ -113,6 +119,8 @@ class DataCleaner:
         df.drop('hed_noise', axis=1, inplace=True)
         df.drop('receiverID', axis=1, inplace=True)
         df.drop('type', axis=1, inplace=True)
+        df.drop('index', axis=1, inplace=True)
+        df.drop('level_0', axis=1, inplace=True)
         # df.drop('senderPseudo', axis=1, inplace=True)
         # df.drop('sender', axis=1, inplace=True)
         return df
@@ -167,6 +175,19 @@ class DataCleaner:
                 cleanedTestFiles.append(cleanedTestFile)
         return cleanedTestFiles
 
+    @staticmethod
+    def getCleanMergedData() -> DataFrame:
+        pathlib.Path(DataCleaner.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
+
+        if path.isfile(DataCleaner.MERGED_CLEANED_DATA_FILE):
+            return pd.read_csv(DataCleaner.MERGED_CLEANED_DATA_FILE)
+        else:
+            dfs = DataCleaner.getCleanData()
+            mergedDf = pd.concat(dfs, axis=0, ignore_index=True)
+            mergedDf.drop_duplicates(subset=['sender', 'messageID'], inplace=True)
+            mergedDf.to_csv(DataCleaner.MERGED_CLEANED_DATA_FILE, index=False)
+            return mergedDf
+
 
 
 
@@ -174,19 +195,26 @@ def filterGroundTruthPath(pathname):
     return not ("groundtruth" in pathname.lower())
 
 if (__name__ == "__main__"):
-    print("Getting ground truth file...[1/3]")
+    print("Getting ground truth file...[1/4]")
     groundTruthData = DataGatherer.gatherData(DataGatherer.DATA_PATH, DataGatherer.GROUND_TRUTH_FILENAME, DataGatherer.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
 
-    print("Converting test json files to csv files and expanding columns...[2/3]")
+    print("Converting test json files to csv files and expanding columns...[2/4]")
     populatedTestFiles = DataCleaner.getPopulatedData()
-    print("Cleaning data...[3/3]")
+    print("Cleaning data...[3/4]")
     cleanedTestFiles = DataCleaner.getCleanData()
 
     print("Done!")
     print("First result:")
     print(cleanedTestFiles[0].head(5))
+    print(cleanedTestFiles[0].shape)
     # for cleanedTestFile in cleanedTestFiles:
     #         print(cleanedTestFile.head(2))
+
+    print("Merging... [4/4]")
+    mergedCleanedTestFiles = DataCleaner.getCleanMergedData()
+    print("Done!")
+    print(mergedCleanedTestFiles.head(5))
+    print(mergedCleanedTestFiles.shape)
 
 
 
