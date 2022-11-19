@@ -1,29 +1,33 @@
-### 2022-11-15_16-46-23 ### 
+### 2022-11-17_21-34-59 ### 
 Getting ground truth file...[1/4] 
 Converting test json files to csv files and expanding columns...[2/4] 
 Cleaning data...[3/4] 
 Done! 
 First result: 
-        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX         posY       spdX      spdY      aclX      aclY      hedX      hedY
-0  50854.029711  50854.029711   903.0      109035.0  1774107.0       False  1092.257299   945.014720 -13.338240 -3.433180  0.816861  0.210469 -0.999451 -0.033145
-1  50854.534651  50854.534651   915.0      109155.0  1774981.0        True  1378.647674  1119.970547  -4.201752 -9.693506 -0.141053 -0.325504 -0.410308 -0.911947
-2  50854.756328  50854.756328   921.0      109215.0  1775497.0       False  1239.299773   976.609506  -9.929512 -0.178527 -0.278654 -0.004972 -0.996142  0.087758
-3  50854.757818  50854.757818   909.0      109095.0  1775597.0       False  1257.441696   976.033301  -9.939303  0.840651 -0.028332  0.002504 -0.973217  0.229889
-4  50855.029714  50855.029714   903.0      109035.0  1776004.0       False  1078.953942   941.581205 -13.423223 -3.455095 -0.371570 -0.095458 -0.999944  0.010624 
+        rcvTime      sendTime  sender  senderPseudo  messageID  ...      spdY      aclX      aclY      hedX      hedY
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0  ... -3.433180  0.816861  0.210469 -0.999451 -0.033145
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0  ... -9.693506 -0.141053 -0.325504 -0.410308 -0.911947
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0  ... -0.178527 -0.278654 -0.004972 -0.996142  0.087758
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0  ...  0.840651 -0.028332  0.002504 -0.973217  0.229889
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0  ... -3.455095 -0.371570 -0.095458 -0.999944  0.010624
+
+[5 rows x 14 columns] 
 (338, 14) 
 Merging... [4/4] 
 Done! 
-        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX         posY       spdX      spdY      aclX      aclY      hedX      hedY
-0  50854.029711  50854.029711   903.0      109035.0  1774107.0       False  1092.257299   945.014720 -13.338240 -3.433180  0.816861  0.210469 -0.999451 -0.033145
-1  50854.534651  50854.534651   915.0      109155.0  1774981.0        True  1378.647674  1119.970547  -4.201752 -9.693506 -0.141053 -0.325504 -0.410308 -0.911947
-2  50854.756328  50854.756328   921.0      109215.0  1775497.0       False  1239.299773   976.609506  -9.929512 -0.178527 -0.278654 -0.004972 -0.996142  0.087758
-3  50854.757818  50854.757818   909.0      109095.0  1775597.0       False  1257.441696   976.033301  -9.939303  0.840651 -0.028332  0.002504 -0.973217  0.229889
-4  50855.029714  50855.029714   903.0      109035.0  1776004.0       False  1078.953942   941.581205 -13.423223 -3.455095 -0.371570 -0.095458 -0.999944  0.010624 
+        rcvTime      sendTime  sender  senderPseudo  messageID  ...      spdY      aclX      aclY      hedX      hedY
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0  ... -3.433180  0.816861  0.210469 -0.999451 -0.033145
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0  ... -9.693506 -0.141053 -0.325504 -0.410308 -0.911947
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0  ... -0.178527 -0.278654 -0.004972 -0.996142  0.087758
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0  ...  0.840651 -0.028332  0.002504 -0.973217  0.229889
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0  ... -3.455095 -0.371570 -0.095458 -0.999944  0.010624
+
+[5 rows x 14 columns] 
 (100897, 14) 
 Getting clean data.. 
 Quick stats on clean data 
 Getting Data Sets.. 
-Time elapsed: (hh:mm:ss:ms) 0:00:00.025999 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.022010 
 Quick stats on features and answers for the train-val-test split 
 Verifying the features and answers for the sets add up 
 Adding up X 
@@ -32,22 +36,22 @@ Adding up Y
 Sum: 1.0 
 Building many models from list the list of classifiers:  ['Nearest Neighbors', 'Linear SVM', 'RBF SVM', 'Decision Tree', 'Random Forest', 'Neural Net'] 
 Building Model on: Nearest Neighbors 
-Time elapsed: (hh:mm:ss:ms) 0:00:00.201001 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.188455 
 Possible tests: dict_keys(['explained_variance', 'r2', 'max_error', 'matthews_corrcoef', 'neg_median_absolute_error', 'neg_mean_absolute_error', 'neg_mean_absolute_percentage_error', 'neg_mean_squared_error', 'neg_mean_squared_log_error', 'neg_root_mean_squared_error', 'neg_mean_poisson_deviance', 'neg_mean_gamma_deviance', 'accuracy', 'top_k_accuracy', 'roc_auc', 'roc_auc_ovr', 'roc_auc_ovo', 'roc_auc_ovr_weighted', 'roc_auc_ovo_weighted', 'balanced_accuracy', 'average_precision', 'neg_log_loss', 'neg_brier_score', 'adjusted_rand_score', 'rand_score', 'homogeneity_score', 'completeness_score', 'v_measure_score', 'mutual_info_score', 'adjusted_mutual_info_score', 'normalized_mutual_info_score', 'fowlkes_mallows_score', 'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'f1', 'f1_macro', 'f1_micro', 'f1_samples', 'f1_weighted', 'jaccard', 'jaccard_macro', 'jaccard_micro', 'jaccard_samples', 'jaccard_weighted']) 
 Testing model on Train 
-Time elapsed: (hh:mm:ss:ms) 0:00:01.297999 
+Time elapsed: (hh:mm:ss:ms) 0:00:01.296434 
 train-accuracy_score: 0.7171033070137764 
 train-precision_score: 0.6673583794158447 
 train-recall_score: 0.5890729687206525 
 train-f1_score: 0.5877130905955691 
 Testing model on val 
-Time elapsed: (hh:mm:ss:ms) 0:00:00.419000 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.433967 
 val-accuracy_score: 0.6042420337975123 
 val-precision_score: 0.4316447807930723 
 val-recall_score: 0.46151892213459134 
 val-f1_score: 0.4321366290255878 
 Testing model on test 
-Time elapsed: (hh:mm:ss:ms) 0:00:00.417010 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.433596 
 test-accuracy_score: 0.6063429137760159 
 test-precision_score: 0.4318255908132946 
 test-recall_score: 0.46049901313143843 

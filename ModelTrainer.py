@@ -161,8 +161,8 @@ class ModelTrainer:
             # "QDA",
 
             "Nearest Neighbors",
-            "Linear SVM",
-            "RBF SVM",
+            # "Linear SVM",
+            # "RBF SVM",
 
 
             # "Gaussian Process",
@@ -187,9 +187,9 @@ class ModelTrainer:
             # GaussianNB(),
             # QuadraticDiscriminantAnalysis(),
             KNeighborsClassifier(),
-            SVC(kernel="linear", C=0.025),
+            # SVC(kernel="linear", C=0.025),
             # SVC(gamma=2, C=1),
-            SVC(),
+            # SVC(),
 
 
             # SVC(),
