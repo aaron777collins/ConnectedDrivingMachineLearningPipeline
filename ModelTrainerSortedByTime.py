@@ -108,14 +108,15 @@ class ModelTrainerSortedByTime:
 
         self.logger.log("Getting Data Sets..")
         startTime = dt.now()
-        features, answers = DataSplitter(classifierName='isAttacker').getAllFeaturesAndAnswers(data)
+        # features, answers = DataSplitter(classifierName='isAttacker').getAllFeaturesAndAnswers(data)
+        features, answers = [data.drop(['isAttacker'], axis=1), pd.DataFrame(data, columns=['isAttacker'])]
         # X_train, Y_train, X_val, Y_val, X_test, Y_test = DataSplitter(classifierName='isAttacker').getTrainValTestSplit(data)
 
-        shape_80 = int(df.shape[1]*0.8)-1
-        X_train = features.iloc[:, :shape_80]
-        Y_train = answers.iloc[:, :shape_80]
-        X_test = features.iloc[:, shape_80:]
-        Y_test = answers.iloc[:, shape_80:]
+        shape_80 = int(features.shape[0]*0.8)-1
+        X_train = features.iloc[:shape_80, :]
+        Y_train = answers.iloc[:shape_80, :]
+        X_test = features.iloc[shape_80:, :]
+        Y_test = answers.iloc[shape_80:, :]
 
 
 
