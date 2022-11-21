@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn import metrics
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.gaussian_process import GaussianProcessClassifier
-from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
@@ -72,14 +72,14 @@ CSV_FORMAT = {CSV_COLUMNS[i]: i for i in range(len(CSV_COLUMNS))}
 OVERWRITE_MODEL = True
 
 
-class ModelTrainer:
+class ModelTrainerSortedByTime:
     def main(self):
 
         id = "concat"
 
         print(f"Creating Logger for model with id:{id}")
-        self.logger = Logger( f"Model-{id}-merged.txt")
-        self.csvWriter = CSVWriter(f"Models-{id}-merged.csv", CSV_COLUMNS)
+        self.logger = Logger( f"Model-{id}-merged-sorted.txt")
+        self.csvWriter = CSVWriter(f"Models-{id}-merged-sorted.csv", CSV_COLUMNS)
 
         self.logger.log("Getting ground truth file...[1/4]")
         groundTruthData = DataGatherer.gatherData(DataGatherer.DATA_PATH, DataGatherer.GROUND_TRUTH_FILENAME, DataGatherer.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
@@ -97,27 +97,33 @@ class ModelTrainer:
         #         print(cleanedTestFile.head(2))
 
         self.logger.log("Merging... [4/4]")
-        data = DataCleaner.getCleanMergedData()
+        data = DataCleaner.getCleanMergedSortedData()
         self.logger.log("Done!")
         self.logger.log(str(data.head(5)))
         self.logger.log(str(data.shape))
 
 
-        # self.logger.log("Getting clean data..")
-        # data: pd.DataFrame = DataCleaner.getCleanMergedData()
-        self.logger.log("Quick stats on clean data")
+        self.logger.log("Quick stats on clean, merged and sorted data")
         Helper.quickDfStat(data)
 
         self.logger.log("Getting Data Sets..")
         startTime = dt.now()
         features, answers = DataSplitter(classifierName='isAttacker').getAllFeaturesAndAnswers(data)
         # X_train, Y_train, X_val, Y_val, X_test, Y_test = DataSplitter(classifierName='isAttacker').getTrainValTestSplit(data)
-        X_train, X_test, Y_train, Y_test = train_test_split(features, answers, test_size=0.2, random_state=42)
+
+        shape_80 = int(df.shape[1]*0.8)-1
+        X_train = features.iloc[:, :shape_80]
+        Y_train = answers.iloc[:, :shape_80]
+        X_test = features.iloc[:, shape_80:]
+        Y_test = answers.iloc[:, shape_80:]
+
+
+
+
         self.logger.log( f"Time elapsed: (hh:mm:ss:ms) {dt.now()-startTime}")
 
         self.logger.log( "Quick stats on features and answers for the train-val-test split")
         Helper.quickDfArrStat([X_train, Y_train])
-        # Helper.quickDfArrStat([X_val, Y_val])
         Helper.quickDfArrStat([X_test, Y_test])
 
         self.logger.log( "Verifying the features and answers for the sets add up")
@@ -352,4 +358,4 @@ class ModelTrainer:
 
 
 if __name__ == "__main__":
-    ModelTrainer().main()
+    ModelTrainerSortedByTime().main()

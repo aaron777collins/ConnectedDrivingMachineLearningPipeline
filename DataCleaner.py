@@ -14,6 +14,7 @@ class DataCleaner:
     POPULATED_DATA_PATH = path.join("data", "populatedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
     CLEANED_DATA_PATH = path.join("data", "cleanedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
     MERGED_CLEANED_DATA_FILE = path.join(CLEANED_DATA_PATH, "mergedData.csv")
+    MERGED_CLEANED_SORTED_DATA_FILE = path.join(CLEANED_DATA_PATH, "mergedSortedData.csv")
     IS_ATTACKER_DATA_PATH = path.join("data", "isAttacker", "VeReMi_50400_54000_2022-9-11_19.11.57")
     IS_ATTACKER_DATA_FILE = path.join(IS_ATTACKER_DATA_PATH, "isattacker.txt")
 
@@ -187,6 +188,21 @@ class DataCleaner:
             mergedDf.drop_duplicates(subset=['sender', 'messageID'], inplace=True)
             mergedDf.to_csv(DataCleaner.MERGED_CLEANED_DATA_FILE, index=False)
             return mergedDf
+
+    @staticmethod
+    def getCleanMergedSortedData() -> DataFrame:
+        pathlib.Path(DataCleaner.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
+
+        if path.isfile(DataCleaner.MERGED_CLEANED_SORTED_DATA_FILE):
+            return pd.read_csv(DataCleaner.MERGED_CLEANED_SORTED_DATA_FILE)
+        else:
+            dfs = DataCleaner.getCleanData()
+            mergedDf = pd.concat(dfs, axis=0, ignore_index=True)
+            mergedDf.drop_duplicates(subset=['sender', 'messageID'], inplace=True)
+            mergedDf.sort_values(by=['sendTime'])
+            mergedDf.to_csv(DataCleaner.MERGED_CLEANED_SORTED_DATA_FILE, index=False)
+            return mergedDf
+
 
 
 
