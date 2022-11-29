@@ -30,3 +30,4 @@ threadpoolctl
 urllib3
 Werkzeug
 EasyMLLib
+tensorflow
