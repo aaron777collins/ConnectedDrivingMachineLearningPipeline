@@ -1,15 +1,11 @@
 certifi
 charset-normalizer
-click
 colorama
 cycler
 et-xmlfile
-Flask
 fonttools
 idna
 itsdangerous
-Jinja2
-joblib
 kiwisolver
 MarkupSafe
 matplotlib
@@ -21,7 +17,6 @@ Pillow
 pyparsing
 python-dateutil
 pytz
-requests
 scikit-learn
 scikit-plot
 scipy

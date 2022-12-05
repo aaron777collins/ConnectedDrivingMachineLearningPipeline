@@ -1,3 +1,5 @@
 #!/bin/bash
-python -m venv cddg-pipeline-env
-.\\cddg-pipeline-env\Scripts\activate
+module load python/3.10.2
+virtualenv --no-download ~/ENV
+source ~/ENV/bin/activate
+
