@@ -1,0 +1,37 @@
+### 2022-12-07_12-08-59 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...      aclY      hedX      hedY
+0  51753.243159  51753.243159  2445.0  ... -1.612366 -0.760703 -0.649100
+1  51753.774314  51753.774314  2463.0  ... -1.349944 -0.760885 -0.648886
+2  51753.839958  51753.839958  2451.0  ... -1.612366 -0.760703 -0.649100
+3  51754.243160  51754.243160  2445.0  ... -0.937217 -0.760703 -0.649100
+4  51754.774315  51754.774315  2463.0  ... -1.237417 -0.763817 -0.645433
+
+[5 rows x 14 columns] 
+(354, 14) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...      aclY      hedX      hedY
+0  51753.243159  51753.243159  2445.0  ... -1.612366 -0.760703 -0.649100
+1  51753.774314  51753.774314  2463.0  ... -1.349944 -0.760885 -0.648886
+2  51753.839958  51753.839958  2451.0  ... -1.612366 -0.760703 -0.649100
+3  51754.243160  51754.243160  2445.0  ... -0.937217 -0.760703 -0.649100
+4  51754.774315  51754.774315  2463.0  ... -1.237417 -0.763817 -0.645433
+
+[5 rows x 14 columns] 
+(100897, 14) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005337 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
