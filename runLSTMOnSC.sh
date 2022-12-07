@@ -5,4 +5,4 @@
 #SBATCH --mem=128G # 128GiB of memery
 #SBATCH -t 0-06:0 # Running time of 10 min is 0-00:10
 . ~/ENV/bin/activate
-python ModelTrainerSortedByTimeLSTM.py
+python ModelTrainerSCSortedByTimeLSTM.py
