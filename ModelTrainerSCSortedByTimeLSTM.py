@@ -47,8 +47,9 @@ MODEL_FILE_NAME_BEGINNING = "model-"
 MODEL_EXT = ".model"
 MODEL_NAME = "LSTM"
 
-BATCH_SIZE = 64
-EPOCHS = 2
+BATCH_SIZE = 128
+# 3 times the number of cols in the data
+EPOCHS = 40
 
 # TESTS = ['accuracy', 'precision_micro', 'recall_micro', 'f1_micro', 'precision_macro', 'recall_macro', 'f1_macro']
 TESTS = [accuracy_score, precision_score, recall_score, f1_score]
@@ -89,7 +90,10 @@ class ModelTrainerSortedByTime:
         # Add an Embedding layer expecting input vocab of size (inputted), and
         # output embedding dimension of size 64.
         #  60000, 1000
-        LSTMModel.add(layers.Embedding(input_dim=13000000, output_dim=200))
+        #  13000000
+        #  12491236
+        # 12500000
+        LSTMModel.add(layers.Embedding(input_dim=12500000, output_dim=10000))
 
         # Add a LSTM layer with 128 internal units.
         # Changing to different amount
