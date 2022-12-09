@@ -1,0 +1,14 @@
+2022-12-08 17:08:33.174421: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-12-08 17:08:37.126267: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2022-12-08 17:09:23.610892: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2022-12-08 17:09:23.612907: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2022-12-08 17:09:23.612938: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2022-12-08 17:11:29.123508: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2022-12-08 17:11:29.125930: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2022-12-08 17:11:29.126185: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (bl12442.int.ets1.calculquebec.ca): /proc/driver/nvidia/version does not exist
+2022-12-08 17:11:29.149271: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-12-08 17:11:29.484661: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 300000000000 exceeds 10% of free system memory.
+2022-12-08 17:12:08.689716: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 300000000000 exceeds 10% of free system memory.
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=33249058.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
