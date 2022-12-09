@@ -85,7 +85,7 @@ class ModelTrainerSortedByTime:
     def get_uncompiled_model(self):
         LSTMModel = keras.Sequential()
 
-        LSTMModel.add(layers.Input(13,))
+        LSTMModel.add(layers.Input(13))
 
         # Add an Embedding layer expecting input vocab of size (inputted), and
         # output embedding dimension of size 64.
@@ -93,7 +93,7 @@ class ModelTrainerSortedByTime:
         #  13000000
         #  12491236
         # 12500000
-        LSTMModel.add(layers.Embedding(input_dim=12500000, output_dim=6000))
+        LSTMModel.add(layers.Embedding(input_dim=13000000, output_dim=1000, input_length=13))
 
         # Add a LSTM layer with 128 internal units.
         # Changing to different amount
