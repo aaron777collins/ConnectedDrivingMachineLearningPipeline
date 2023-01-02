@@ -89,6 +89,39 @@ class DataCleaner:
         df.drop("spd", axis=1, inplace=True)
         df.drop("acl", axis=1, inplace=True)
         df.drop("hed", axis=1, inplace=True)
+
+        # posX and Y
+        # neg values
+        df["posXNeg"] = np.where(df["posX"] < 0, 1, 0)
+        df["posYNeg"] = np.where(df["posY"] < 0, 1, 0)
+        # make absolute
+        df["posX"] = np.abs(df["posX"])
+        df["posY"] = np.abs(df["posY"])
+
+        # spdX and Y
+        # neg values
+        df["spdXNeg"] = np.where(df["spdX"] < 0, 1, 0)
+        df["spdYNeg"] = np.where(df["spdY"] < 0, 1, 0)
+        # make absolute
+        df["spdX"] = np.abs(df["spdX"])
+        df["spdY"] = np.abs(df["spdY"])
+
+        # aclX and Y
+        # neg values
+        df["aclXNeg"] = np.where(df["aclX"] < 0, 1, 0)
+        df["aclYNeg"] = np.where(df["aclY"] < 0, 1, 0)
+        # make absolute
+        df["aclX"] = np.abs(df["aclX"])
+        df["aclY"] = np.abs(df["aclY"])
+
+        # hedX and Y
+        # neg values
+        df["hedXNeg"] = np.where(df["hedX"] < 0, 1, 0)
+        df["hedYNeg"] = np.where(df["hedY"] < 0, 1, 0)
+        # make absolute
+        df["hedX"] = np.abs(df["hedX"])
+        df["hedY"] = np.abs(df["hedY"])
+
         return df
 
     @staticmethod

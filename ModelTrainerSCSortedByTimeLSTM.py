@@ -75,6 +75,8 @@ CSV_COLUMNS.extend(TESTS_WITH_SAMPLE_NAMES)
 
 CSV_FORMAT = {CSV_COLUMNS[i]: i for i in range(len(CSV_COLUMNS))}
 
+NUM_INPUTS = 21
+
 
 # PARAM
 OVERWRITE_MODEL = True
@@ -85,7 +87,7 @@ class ModelTrainerSortedByTime:
     def get_uncompiled_model(self):
         LSTMModel = keras.Sequential()
 
-        LSTMModel.add(layers.Input(13))
+        LSTMModel.add(layers.Input(NUM_INPUTS))
 
         # Add an Embedding layer expecting input vocab of size (inputted), and
         # output embedding dimension of size 64.
