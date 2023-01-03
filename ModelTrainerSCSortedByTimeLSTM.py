@@ -80,22 +80,17 @@ CSV_FORMAT = {CSV_COLUMNS[i]: i for i in range(len(CSV_COLUMNS))}
 
 NUM_INPUTS = 21
 
-
 # PARAM
 OVERWRITE_MODEL = True
 
-def RoundLayer(tensor):
-    return round_0_or_1(mathtf.round(tensor))
+class ModelTrainerSCSortedByTimeLSTM:
 
-
-@tf.function
-def round_0_or_1(number) -> float:
-    if (number == 0):
-        return 0.0
-    else:
-        return 1.0
-
-class ModelTrainerSortedByTime:
+    @staticmethod
+    def round_0_or_1(number) -> float:
+        if (number < 0.5):
+            return 0.0
+        else:
+            return 1.0
 
     def get_uncompiled_model(self):
         LSTMModel = keras.Sequential()
@@ -118,10 +113,8 @@ class ModelTrainerSortedByTime:
         # sigmoid is the proper activation function for binary classification
         LSTMModel.add(layers.Dense(1, activation='sigmoid'))
 
-        # Add rounding layer
-        LSTMModel.add(layers.Lambda(RoundLayer, name="RoundingLayer"))
-
         LSTMModel.summary()
+
         return LSTMModel
 
 # Q: what is the proper optimizer for binary classification with tensorflow?
@@ -136,14 +129,13 @@ class ModelTrainerSortedByTime:
                  keras.metrics.Recall()])
         return LSTMModel
 
-
     def main(self):
 
         id = "SC-concat"
 
         print(f"Creating Logger for model with id:{id}")
-        self.logger = Logger( f"Model-{id}-merged-sorted-LSTM.txt")
-        self.csvWriter = CSVWriter(f"Models-{id}-merged-sorted-LSTM.csv", CSV_COLUMNS)
+        self.logger = Logger( f"Model-{id}-merged-sorted-LSTM-v1.txt")
+        self.csvWriter = CSVWriter(f"Models-{id}-merged-sorted-LSTM-v1.csv", CSV_COLUMNS)
 
         self.logger.log("Getting ground truth file...[1/4]")
         groundTruthData = DataGatherer.gatherData(DataGatherer.DATA_PATH, DataGatherer.GROUND_TRUTH_FILENAME, DataGatherer.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
@@ -253,9 +245,12 @@ class ModelTrainerSortedByTime:
 
         self.logger.log(f"Possible tests:", metrics.SCORERS.keys())
 
+        roundNums = lambda x: ModelTrainerSCSortedByTimeLSTM.round_0_or_1(x)
+
         self.logger.log("Testing model on Train")
         startTime = dt.now()
-        y_pred = model.predict(X_train)
+        y_pred = roundNums(model.predict(X_train))
+
         timeElapsed = dt.now()-startTime
         self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
         row[CSV_FORMAT[f"train-time"]] = timeElapsed.total_seconds() / \
@@ -270,38 +265,9 @@ class ModelTrainerSortedByTime:
             self.logger.log(f"train-{test_type.__name__}:", res)
             row[CSV_FORMAT[f"train-{test_type.__name__}"]] = res
 
-        # self.logger.log("Testing model on val")
-        # startTime = dt.now()
-        # y_pred = model.predict(X_val)
-        # timeElapsed = dt.now()-startTime
-        # self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
-        # row[CSV_FORMAT[f"val-time"]] = timeElapsed.total_seconds() / \
-        #     len(X_val.index)
-        # for test_type in TESTS:
-        #     res = None
-        #     if (test_type.__name__ == accuracy_score.__name__):
-        #         res = test_type(Y_val, y_pred)
-        #     else:
-        #         res = test_type(Y_val, y_pred, average='macro')
-        #     self.logger.log(f"val-{test_type.__name__}:", res)
-        #     row[CSV_FORMAT[f"val-{test_type.__name__}"]] = res
-
-        #     self.logger.log("Testing model on Val")
-        # for test_type in TESTS:
-        #     startTime = dt.now()
-        #     res = cross_val_score(
-        #         model, X_val, Y_val, cv=5, scoring=test_type)
-        #     self.logger.log(f"Tested {test_type}", res)
-        #     timeElapsed = dt.now()-startTime
-        #     self.logger.log(
-        #         f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
-        #     row[CSV_FORMAT[f"val-{test_type}"]] = res
-        #     row[CSV_FORMAT[f"val-{test_type}-time"]
-        #         ] = timeElapsed.total_seconds() / len(X_val.index)
-
         self.logger.log("Testing model on test")
         startTime = dt.now()
-        y_pred = model.predict(X_test)
+        y_pred = roundNums(model.predict(X_test))
         timeElapsed = dt.now()-startTime
         self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
         row[CSV_FORMAT[f"test-time"]] = timeElapsed.total_seconds() / \
@@ -358,4 +324,4 @@ class ModelTrainerSortedByTime:
 
 
 if __name__ == "__main__":
-    ModelTrainerSortedByTime().main()
+    ModelTrainerSCSortedByTimeLSTM().main()
