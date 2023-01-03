@@ -1,0 +1,147 @@
+2023-01-02 23:22:04.547730: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-02 23:22:04.781372: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-01-02 23:22:04.824687: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-01-02 23:22:32.744113: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2023-01-02 23:22:32.760773: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2023-01-02 23:22:32.760810: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-01-02 23:26:38.086444: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2023-01-02 23:26:38.224973: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2023-01-02 23:26:38.225204: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (bl12432.int.ets1.calculquebec.ca): /proc/driver/nvidia/version does not exist
+2023-01-02 23:26:38.236251: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Creating Logger for model with id:SC-concat
+### 2023-01-02_23-23-26 ###
+Getting ground truth file...[1/4]
+Converting test json files to csv files and expanding columns...[2/4]
+Warning: Error was caught:
+'sender'
+File  traceJSON-3537-3535-A0-52252-14.csv had issues being expanded and will likely be removed since it contains ONLY type 2 messages (Couldn't find the 'sender' columnn)
+Cleaning data...[3/4]
+Done!
+First result:
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  53116.156561  53116.156561  4989.0  ...        1        1        1
+1  53116.159207  53116.159207  4905.0  ...        1        0        0
+2  53116.186748  53116.186748  4671.0  ...        0        0        1
+3  53116.251014  53116.251014  4995.0  ...        1        0        0
+4  53116.562243  53116.562243  5013.0  ...        1        1        1
+
+[5 rows x 22 columns]
+(633, 22)
+Merging... [4/4]
+Done!
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  53116.156561  53116.156561  4989.0  ...        1        1        1
+1  53116.159207  53116.159207  4905.0  ...        1        0        0
+2  53116.186748  53116.186748  4671.0  ...        0        0        1
+3  53116.251014  53116.251014  4995.0  ...        1        0        0
+4  53116.562243  53116.562243  5013.0  ...        1        1        1
+
+[5 rows x 22 columns]
+(100897, 22)
+Quick stats on clean, merged and sorted data
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  53116.156561  53116.156561  4989.0  ...        1        1        1
+1  53116.159207  53116.159207  4905.0  ...        1        0        0
+2  53116.186748  53116.186748  4671.0  ...        0        0        1
+3  53116.251014  53116.251014  4995.0  ...        1        0        0
+4  53116.562243  53116.562243  5013.0  ...        1        1        1
+
+[5 rows x 22 columns]
+(100897, 22)
+Getting Data Sets..
+Time elapsed: (hh:mm:ss:ms) 0:00:00.008650
+Quick stats on features and answers for the train-val-test split
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  53116.156561  53116.156561  4989.0  ...        1        1        1
+1  53116.159207  53116.159207  4905.0  ...        1        0        0
+2  53116.186748  53116.186748  4671.0  ...        0        0        1
+3  53116.251014  53116.251014  4995.0  ...        1        0        0
+4  53116.562243  53116.562243  5013.0  ...        1        1        1
+
+[5 rows x 21 columns]
+(80716, 21)
+   isAttacker
+0           0
+1           0
+2           0
+3           0
+4           0
+(80716, 1)
+             rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+207948  51093.174813  51093.174813  1359.0  ...        0        1        1
+207949  51094.174813  51094.174813  1359.0  ...        0        1        1
+207950  51095.174815  51095.174815  1359.0  ...        1        1        1
+207951  51096.174811  51096.174811  1359.0  ...        1        1        1
+207953  51097.174820  51097.174820  1359.0  ...        1        1        1
+
+[5 rows x 21 columns]
+(20181, 21)
+        isAttacker
+207948           0
+207949           0
+207950           0
+207951           0
+207953           0
+(20181, 1)
+Verifying the features and answers for the sets add up
+Adding up X
+Sum: 1.0
+Adding up Y
+Sum: 1.0
+Building LSTM
+Building Model on: LSTM
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #
+=================================================================
+ embedding (Embedding)       (None, 21, 1000)          1300000000
+                                                       0
+
+ lstm (LSTM)                 (None, 128)               578048
+
+ dense (Dense)               (None, 1)                 129
+
+ RoundingLayer (Lambda)      ()                        0
+
+=================================================================
+Total params: 13,000,578,177
+Trainable params: 13,000,578,177
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/2
+Traceback (most recent call last):
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 361, in <module>
+    ModelTrainerSortedByTime().main()
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 234, in main
+    [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 355, in buildModel
+    history = model.fit(features, answers, batch_size=BATCH_SIZE, epochs=EPOCHS)
+  File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/tmp/__autograph_generated_filece5f9dga.py", line 15, in tf__train_function
+    retval_ = ag__.converted_call(ag__.ld(step_function), (ag__.ld(self), ag__.ld(iterator)), None, fscope)
+TypeError: in user code:
+
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1160, in train_function  *
+        return step_function(self, iterator)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1146, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1135, in run_step  **
+        outputs = model.train_step(data)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 994, in train_step
+        loss = self.compute_loss(x, y, y_pred, sample_weight)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1052, in compute_loss
+        return self.compiled_loss(
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/compile_utils.py", line 265, in __call__
+        loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/losses.py", line 152, in __call__
+        losses = call_fn(y_true, y_pred)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/losses.py", line 272, in call  **
+        return ag_fn(y_true, y_pred, **self._fn_kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/losses.py", line 2152, in binary_crossentropy
+        label_smoothing = tf.convert_to_tensor(label_smoothing, dtype=y_pred.dtype)
+
+    TypeError: Expected int32, but got 0.0 of type 'float'.
+

@@ -89,11 +89,11 @@ def RoundLayer(tensor):
 
 
 @tf.function
-def round_0_or_1(number) -> int:
+def round_0_or_1(number) -> float:
     if (number == 0):
-        return 0
+        return 0.0
     else:
-        return 1
+        return 1.0
 
 class ModelTrainerSortedByTime:
 
