@@ -1,0 +1,108 @@
+2023-01-02 21:52:33.494597: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-02 21:52:33.787129: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-01-02 21:52:35.425966: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2023-01-02 21:52:35.426775: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2023-01-02 21:52:35.426808: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-01-02 21:52:42.768346: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2023-01-02 21:52:42.769207: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2023-01-02 21:52:42.769254: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (bl12437.int.ets1.calculquebec.ca): /proc/driver/nvidia/version does not exist
+2023-01-02 21:52:42.770102: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Creating Logger for model with id:SC-concat
+### 2023-01-02_21-52-37 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 22 columns] 
+(301, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.008363 
+Quick stats on features and answers for the train-val-test split 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 21 columns]
+(80716, 21)
+   isAttacker
+0       False
+1       False
+2       False
+3       False
+4       False
+(80716, 1)
+   index       rcvTime      sendTime  ...  aclYNeg  hedXNeg  hedYNeg
+0  80716  51318.247847  51318.247847  ...        0        1        1
+1  80717  52872.049681  52872.049681  ...        0        0        1
+2  80718  52873.049681  52873.049681  ...        0        0        1
+3  80719  52874.049681  52874.049681  ...        0        0        1
+4  80720  52875.049682  52875.049682  ...        0        0        1
+
+[5 rows x 22 columns]
+(20181, 22)
+   index  isAttacker
+0  80716       False
+1  80717       False
+2  80718       False
+3  80719       False
+4  80720       False
+(20181, 2)
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding (Embedding)       (None, 21, 1000)          1300000000
+                                                       0         
+                                                                 
+ lstm (LSTM)                 (None, 128)               578048    
+                                                                 
+ dense (Dense)               (None, 1)                 129       
+                                                                 
+=================================================================
+Total params: 13,000,578,177
+Trainable params: 13,000,578,177
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/2
+ 1/17 [>.............................] - ETA: 12:09 - loss: 0.6840 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00slurmstepd: error: *** JOB 33703140 ON bl12437 CANCELLED AT 2023-01-03T02:53:53 ***

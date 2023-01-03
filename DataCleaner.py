@@ -27,7 +27,7 @@ class DataCleaner:
         df.reset_index(inplace=True)
         df['receiverID'] = fileName.split("-")[1]
         try:
-            df["isAttacker"] = np.where(df["sender"].astype(int).isin(maliciousFilesIDs), True, False)
+            df["isAttacker"] = np.where(df["sender"].astype(int).isin(maliciousFilesIDs), 1, 0)
         except Exception as e:
             print("Warning: Error was caught:")
             print(e)
@@ -265,5 +265,5 @@ if (__name__ == "__main__"):
     print(mergedCleanedTestFiles.head(5))
     print(mergedCleanedTestFiles.shape)
 
-
+    print(mergedCleanedTestFiles["isAttacker"].value_counts())
 

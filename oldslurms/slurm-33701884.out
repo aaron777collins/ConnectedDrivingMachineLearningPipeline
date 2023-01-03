@@ -1,0 +1,108 @@
+2023-01-02 18:41:03.472523: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-02 18:41:09.881283: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-01-02 18:42:46.758687: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2023-01-02 18:42:46.761244: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2023-01-02 18:42:46.761275: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-01-02 18:45:33.020369: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2023-01-02 18:45:33.025081: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2023-01-02 18:45:33.025283: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (bl12437.int.ets1.calculquebec.ca): /proc/driver/nvidia/version does not exist
+2023-01-02 18:45:33.138728: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Creating Logger for model with id:SC-concat
+### 2023-01-02_18-44-59 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 22 columns] 
+(301, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004878 
+Quick stats on features and answers for the train-val-test split 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52218.254768  52218.254768  3483.0  ...        0        1        0
+1  52218.286053  52218.286053  3465.0  ...        1        1        0
+2  52218.497864  52218.497864  3471.0  ...        0        1        0
+3  52219.254770  52219.254770  3483.0  ...        0        1        0
+4  52219.286055  52219.286055  3465.0  ...        0        1        0
+
+[5 rows x 21 columns]
+(80716, 21)
+   isAttacker
+0       False
+1       False
+2       False
+3       False
+4       False
+(80716, 1)
+             rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+226110  51318.247847  51318.247847  1665.0  ...        0        1        1
+226111  52872.049681  52872.049681  4527.0  ...        0        0        1
+226114  52873.049681  52873.049681  4527.0  ...        0        0        1
+226117  52874.049681  52874.049681  4527.0  ...        0        0        1
+226120  52875.049682  52875.049682  4527.0  ...        0        0        1
+
+[5 rows x 21 columns]
+(20181, 21)
+        isAttacker
+226110       False
+226111       False
+226114       False
+226117       False
+226120       False
+(20181, 1)
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding (Embedding)       (None, 21, 1000)          1300000000
+                                                       0         
+                                                                 
+ lstm (LSTM)                 (None, 128)               578048    
+                                                                 
+ dense (Dense)               (None, 1)                 129       
+                                                                 
+=================================================================
+Total params: 13,000,578,177
+Trainable params: 13,000,578,177
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/40
+  1/631 [..............................] - ETA: 8:05:27 - loss: 0.6899 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  2/631 [..............................] - ETA: 11:54:47 - loss: 0.6086 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  3/631 [..............................] - ETA: 11:31:04 - loss: 0.5334 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  4/631 [..............................] - ETA: 11:35:41 - loss: 0.4625 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  5/631 [..............................] - ETA: 11:31:07 - loss: 0.3976 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  6/631 [..............................] - ETA: 11:24:56 - loss: 0.3485 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  7/631 [..............................] - ETA: 11:23:43 - loss: 0.3017 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  8/631 [..............................] - ETA: 11:21:41 - loss: 0.2649 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00  9/631 [..............................] - ETA: 11:20:04 - loss: 0.2357 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 10/631 [..............................] - ETA: 11:18:45 - loss: 0.2123 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 11/631 [..............................] - ETA: 11:17:26 - loss: 0.1930 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 12/631 [..............................] - ETA: 11:15:20 - loss: 0.1769 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 13/631 [..............................] - ETA: 11:14:17 - loss: 0.1633 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 14/631 [..............................] - ETA: 11:12:13 - loss: 0.1517 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 15/631 [..............................] - ETA: 11:10:13 - loss: 0.1416 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 16/631 [..............................] - ETA: 11:08:11 - loss: 0.1327 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 17/631 [..............................] - ETA: 11:07:10 - loss: 0.1249 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 18/631 [..............................] - ETA: 11:05:46 - loss: 0.1180 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 19/631 [..............................] - ETA: 11:04:17 - loss: 0.1118 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 20/631 [..............................] - ETA: 11:03:52 - loss: 0.1062 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 21/631 [..............................] - ETA: 11:02:20 - loss: 0.1052 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00 22/631 [>.............................] - ETA: 11:00:38 - loss: 0.1043 - accuracy: 0.0000e+00 - precision: 0.0000e+00 - recall: 0.0000e+00slurmstepd: error: *** JOB 33701884 ON bl12437 CANCELLED AT 2023-01-03T00:09:30 ***

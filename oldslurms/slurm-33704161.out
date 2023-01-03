@@ -1,0 +1,110 @@
+2023-01-02 22:55:11.444134: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-02 22:55:13.587837: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-01-02 22:55:14.646582: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-01-02 22:55:52.793303: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2023-01-02 22:55:52.796601: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2023-01-02 22:55:52.796632: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-01-02 23:00:02.655977: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2023-01-02 23:00:02.690261: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2023-01-02 23:00:02.690500: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (bl12412.int.ets1.calculquebec.ca): /proc/driver/nvidia/version does not exist
+2023-01-02 23:00:02.697575: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Creating Logger for model with id:SC-concat
+### 2023-01-02_22-56-45 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Warning: Error was caught:
+'sender'
+File  traceJSON-3537-3535-A0-52252-14.csv had issues being expanded and will likely be removed since it contains ONLY type 2 messages (Couldn't find the 'sender' columnn)
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52558.190865  52558.190865  3741.0  ...        0        0        1
+1  52558.427862  52558.427862  3945.0  ...        0        1        0
+2  52558.478947  52558.478947  3927.0  ...        0        1        0
+3  52558.583431  52558.583431  3855.0  ...        1        1        0
+4  52558.699164  52558.699164  3921.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(1061, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52558.190865  52558.190865  3741.0  ...        0        0        1
+1  52558.427862  52558.427862  3945.0  ...        0        1        0
+2  52558.478947  52558.478947  3927.0  ...        0        1        0
+3  52558.583431  52558.583431  3855.0  ...        1        1        0
+4  52558.699164  52558.699164  3921.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52558.190865  52558.190865  3741.0  ...        0        0        1
+1  52558.427862  52558.427862  3945.0  ...        0        1        0
+2  52558.478947  52558.478947  3927.0  ...        0        1        0
+3  52558.583431  52558.583431  3855.0  ...        1        1        0
+4  52558.699164  52558.699164  3921.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004621 
+Quick stats on features and answers for the train-val-test split 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  52558.190865  52558.190865  3741.0  ...        0        0        1
+1  52558.427862  52558.427862  3945.0  ...        0        1        0
+2  52558.478947  52558.478947  3927.0  ...        0        1        0
+3  52558.583431  52558.583431  3855.0  ...        1        1        0
+4  52558.699164  52558.699164  3921.0  ...        1        1        0
+
+[5 rows x 21 columns]
+(80716, 21)
+   isAttacker
+0           0
+1           0
+2           0
+3           0
+4           0
+(80716, 1)
+             rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+214972  52821.720757  52821.720757  4419.0  ...        1        1        1
+214973  52822.720759  52822.720759  4419.0  ...        0        1        1
+214974  52823.720760  52823.720760  4419.0  ...        1        1        1
+214975  52824.720763  52824.720763  4419.0  ...        0        1        1
+215108  53043.836495  53043.836495  4797.0  ...        0        1        1
+
+[5 rows x 21 columns]
+(20181, 21)
+        isAttacker
+214972           0
+214973           0
+214974           0
+214975           0
+215108           0
+(20181, 1)
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
+Traceback (most recent call last):
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 361, in <module>
+    ModelTrainerSortedByTime().main()
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 234, in main
+    [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 131, in get_compiled_model
+    LSTMModel = self.get_uncompiled_model()
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 122, in get_uncompiled_model
+    LSTMModel.add(layers.Lambda(RoundLayer, name="Rounding Layer"))
+  File "/home/colli11s/ENV/lib/python3.10/site-packages/tensorflow/python/trackable/base.py", line 205, in _method_wrapper
+    result = method(self, *args, **kwargs)
+  File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx512/Core/python/3.10.2/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+ValueError: 'Rounding Layer/' is not a valid root scope name. A root scope name has to match the following pattern: ^[A-Za-z0-9.][A-Za-z0-9_.\\/>-]*$

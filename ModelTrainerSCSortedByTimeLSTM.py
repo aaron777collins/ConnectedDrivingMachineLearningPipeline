@@ -34,6 +34,8 @@ from DataGatherer import DataGatherer
 
 from tensorflow import keras
 from tensorflow.keras import layers
+from tensorflow import math as mathtf
+import tensorflow as tf
 
 # DIB_NAME = "DIB1"
 # DATASETS_PATH = path.join(DIB_NAME, 'dataRaw', 'ID')
@@ -47,9 +49,10 @@ MODEL_FILE_NAME_BEGINNING = "model-"
 MODEL_EXT = ".model"
 MODEL_NAME = "LSTM"
 
-BATCH_SIZE = 128
+# BATCH_SIZE = 128
+BATCH_SIZE = 5000
 # 3 times the number of cols in the data
-EPOCHS = 40
+EPOCHS = 2
 
 # TESTS = ['accuracy', 'precision_micro', 'recall_micro', 'f1_micro', 'precision_macro', 'recall_macro', 'f1_macro']
 TESTS = [accuracy_score, precision_score, recall_score, f1_score]
@@ -81,6 +84,16 @@ NUM_INPUTS = 21
 # PARAM
 OVERWRITE_MODEL = True
 
+def RoundLayer(tensor):
+    return round_0_or_1(mathtf.round(tensor))
+
+
+@tf.function
+def round_0_or_1(number) -> int:
+    if (number == 0):
+        return 0
+    else:
+        return 1
 
 class ModelTrainerSortedByTime:
 
@@ -104,6 +117,9 @@ class ModelTrainerSortedByTime:
         # Add a Dense layer with 2 units.
         # sigmoid is the proper activation function for binary classification
         LSTMModel.add(layers.Dense(1, activation='sigmoid'))
+
+        # Add rounding layer
+        LSTMModel.add(layers.Lambda(RoundLayer, name="RoundingLayer"))
 
         LSTMModel.summary()
         return LSTMModel
