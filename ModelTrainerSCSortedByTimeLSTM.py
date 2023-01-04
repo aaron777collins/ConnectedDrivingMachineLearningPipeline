@@ -1,6 +1,7 @@
 from cgi import test
 from datetime import datetime as dt
 import os.path as path
+from pathlib import Path
 from typing import Tuple
 
 import numpy as np
@@ -37,6 +38,8 @@ from tensorflow.keras import layers
 from tensorflow import math as mathtf
 import tensorflow as tf
 
+import os
+
 # DIB_NAME = "DIB1"
 # DATASETS_PATH = path.join(DIB_NAME, 'dataRaw', 'ID')
 # SELECTED_DATA_SET_PATH = path.join("Single", "ET")
@@ -49,10 +52,13 @@ MODEL_FILE_NAME_BEGINNING = "model-"
 MODEL_EXT = ".model"
 MODEL_NAME = "LSTM"
 
+MODELS_FOLDER = "models"
+MODELS_FOLDER_PATH = Path.cwd / MODELS_FOLDER
+
 # BATCH_SIZE = 128
 BATCH_SIZE = 5000
 # 3 times the number of cols in the data
-EPOCHS = 2
+EPOCHS = 10
 
 # TESTS = ['accuracy', 'precision_micro', 'recall_micro', 'f1_micro', 'precision_macro', 'recall_macro', 'f1_macro']
 TESTS = [accuracy_score, precision_score, recall_score, f1_score]
@@ -87,6 +93,8 @@ class ModelTrainerSCSortedByTimeLSTM:
 
     @staticmethod
     def round_0_or_1(number) -> float:
+        if (isinstance([0], number)):
+            return ModelTrainerSCSortedByTimeLSTM.round_0_or_1(number[0])
         if (number < 0.5):
             return 0.0
         else:
@@ -134,8 +142,9 @@ class ModelTrainerSCSortedByTimeLSTM:
         id = "SC-concat"
 
         print(f"Creating Logger for model with id:{id}")
-        self.logger = Logger( f"Model-{id}-merged-sorted-LSTM-v1.txt")
-        self.csvWriter = CSVWriter(f"Models-{id}-merged-sorted-LSTM-v1.csv", CSV_COLUMNS)
+        modelIDStr = f"Model-{id}-merged-sorted-LSTM-v1.txt"
+        self.logger = Logger( modelIDStr)
+        self.csvWriter = CSVWriter(modelIDStr, CSV_COLUMNS)
 
         self.logger.log("Getting ground truth file...[1/4]")
         groundTruthData = DataGatherer.gatherData(DataGatherer.DATA_PATH, DataGatherer.GROUND_TRUTH_FILENAME, DataGatherer.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
@@ -218,17 +227,24 @@ class ModelTrainerSCSortedByTimeLSTM:
 
         # model = ModelSaver[StackingClassifier]().readModel(model_name)
 
-        # if(not model or OVERWRITE_MODEL):
-        self.logger.log(f"Building Model on: {MODEL_NAME}")
+        Path(MODELS_FOLDER_PATH).mkdir(parents=True, exist_ok=True)
 
-        startTime = dt.now()
+        model = None
 
-        [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
-        modelCompileTime = (dt.now()-startTime)
-        self.logger.log(
-            f"Time elapsed: (hh:mm:ss:ms) {modelCompileTime}")
+        try:
+            model = keras.models.load_model(MODELS_FOLDER, modelIDStr)
+        except IOError:
 
-        self.logger.log("History: ", str(history.history))
+            self.logger.log(f"Building Model on: {MODEL_NAME}")
+
+            startTime = dt.now()
+
+            [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
+            modelCompileTime = (dt.now()-startTime)
+            self.logger.log(
+                f"Time elapsed: (hh:mm:ss:ms) {modelCompileTime}")
+
+            self.logger.log("History: ", str(history.history))
 
         # self.logger.log(f"Saving Model as: {model_name}")
         # startTime = dt.now()
