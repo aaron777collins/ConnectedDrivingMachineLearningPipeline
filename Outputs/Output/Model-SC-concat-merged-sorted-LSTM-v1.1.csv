@@ -1,0 +1,2 @@
+Model,Total Compile Time,Total Sample Size,Compile Time Per Sample,train-accuracy_score,test-accuracy_score,train-precision_score,test-precision_score,train-recall_score,test-recall_score,train-f1_score,test-f1_score,train-time,test-time
+LSTM,"-1 day, 23:59:59.999995",80716,-6.194558699638239e-11,0.9997150502998167,0.9905852039046628,0.9997388336554411,0.9896947755223799,0.9996000930792692,0.9870951830275125,0.9996694236530789,0.9883840344207673,0.00029532925318400316,0.00028041970169961845

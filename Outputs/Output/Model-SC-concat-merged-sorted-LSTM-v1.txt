@@ -1,0 +1,116 @@
+### 2023-01-03_01-34-27 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(1479, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005761 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
+Time elapsed: (hh:mm:ss:ms) 1:42:02.418030 
+History:  {'loss': [0.631903886795044, 0.6171987056732178, 0.16024258732795715, 0.007362511940300465, 0.0038607767783105373, 0.0017329282127320766, 0.0007531919982284307, 0.00044210036867298186, 0.0003763315617106855, 0.00023823320225346833], 'accuracy': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 'precision': [0.3107999861240387, 0.0, 0.9952492713928223, 0.9987382888793945, 0.998818576335907, 0.9996452927589417, 0.9998817443847656, 1.0, 0.9999606013298035, 1.0], 'recall': [0.06125103309750557, 0.0, 0.8009538650512695, 0.9983839988708496, 0.9996846914291382, 0.9997240900993347, 0.9999606013298035, 0.9999606013298035, 1.0, 1.0]} 
+Possible tests: dict_keys(['explained_variance', 'r2', 'max_error', 'matthews_corrcoef', 'neg_median_absolute_error', 'neg_mean_absolute_error', 'neg_mean_absolute_percentage_error', 'neg_mean_squared_error', 'neg_mean_squared_log_error', 'neg_root_mean_squared_error', 'neg_mean_poisson_deviance', 'neg_mean_gamma_deviance', 'accuracy', 'top_k_accuracy', 'roc_auc', 'roc_auc_ovr', 'roc_auc_ovo', 'roc_auc_ovr_weighted', 'roc_auc_ovo_weighted', 'balanced_accuracy', 'average_precision', 'neg_log_loss', 'neg_brier_score', 'adjusted_rand_score', 'rand_score', 'homogeneity_score', 'completeness_score', 'v_measure_score', 'mutual_info_score', 'adjusted_mutual_info_score', 'normalized_mutual_info_score', 'fowlkes_mallows_score', 'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'f1', 'f1_macro', 'f1_micro', 'f1_samples', 'f1_weighted', 'jaccard', 'jaccard_macro', 'jaccard_micro', 'jaccard_samples', 'jaccard_weighted']) 
+Testing model on Train 
+### 2023-01-03_16-52-37 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(1479, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005549 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
+### 2023-01-03_20-06-57 ### 
+Model,Total Compile Time,Total Sample Size,Compile Time Per Sample,train-accuracy_score,test-accuracy_score,train-precision_score,test-precision_score,train-recall_score,test-recall_score,train-f1_score,test-f1_score,train-time,test-time
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0     1026675.0  5211695.0           0  ...        1        0        1        0        1        0
+1  51865.488467  51865.488467  2673.0     1026735.0  5211947.0           1  ...        1        0        1        0        1        0
+2  51865.585766  51865.585766  2799.0     1027995.0  5212623.0           0  ...        1        0        1        0        1        0
+3  51865.808674  51865.808674  2661.0     1026615.0  5213483.0           0  ...        1        0        0        1        1        0
+4  51866.472956  51866.472956  2667.0     1026675.0  5218050.0           0  ...        1        0        0        1        1        0
+
+[5 rows x 22 columns] 
+(1479, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0     1026675.0  5211695.0           0  ...        1        0        1        0        1        0
+1  51865.488467  51865.488467  2673.0     1026735.0  5211947.0           1  ...        1        0        1        0        1        0
+2  51865.585766  51865.585766  2799.0     1027995.0  5212623.0           0  ...        1        0        1        0        1        0
+3  51865.808674  51865.808674  2661.0     1026615.0  5213483.0           0  ...        1        0        0        1        1        0
+4  51866.472956  51866.472956  2667.0     1026675.0  5218050.0           0  ...        1        0        0        1        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004650 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 

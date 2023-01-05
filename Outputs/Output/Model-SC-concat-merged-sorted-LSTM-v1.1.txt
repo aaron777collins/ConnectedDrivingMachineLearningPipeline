@@ -1,0 +1,171 @@
+### 2023-01-03_20-11-13 ###
+Model,Total Compile Time,Total Sample Size,Compile Time Per Sample,train-accuracy_score,test-accuracy_score,train-precision_score,test-precision_score,train-recall_score,test-recall_score,train-f1_score,test-f1_score,train-time,test-time
+Getting ground truth file...[1/4]
+Converting test json files to csv files and expanding columns...[2/4]
+Cleaning data...[3/4]
+Done!
+First result:
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(1479, 22)
+Merging... [4/4]
+Done!
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Quick stats on clean, merged and sorted data
+Getting Data Sets..
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005228
+Quick stats on features and answers for the train-val-test split
+Verifying the features and answers for the sets add up
+Adding up X
+Sum: 1.0
+Adding up Y
+Sum: 1.0
+Building LSTM
+Building Model on: LSTM
+Time elapsed: (hh:mm:ss:ms) 4:44:58.485062
+History:  {'loss': [0.6297476291656494, 0.6202019453048706, 0.24527540802955627, 0.011541116051375866, 0.005370102822780609, 0.003418863983824849, 0.0014483049744740129, 0.0013352902606129646, 0.00501971086487174, 0.0037807857152074575], 'accuracy': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 'precision': [0.4137931168079376, 0.0, 0.9952810406684875, 0.9959920048713684, 0.9983857274055481, 0.9997239112854004, 0.999684751033783, 0.9998029470443726, 0.9980721473693848, 0.9988971948623657], 'recall': [0.0004729809588752687, 0.0, 0.656734049320221, 0.9990540146827698, 0.9994481801986694, 0.9991328716278076, 0.9998817443847656, 0.9998029470443726, 0.9998817443847656, 0.9996452927589417]}
+Saving Model as: model-LSTM-SC-concat.model
+Time elapsed: (hh:mm:ss:ms) 0:05:04.817842
+Possible tests: dict_keys(['explained_variance', 'r2', 'max_error', 'matthews_corrcoef', 'neg_median_absolute_error', 'neg_mean_absolute_error', 'neg_mean_absolute_percentage_error', 'neg_mean_squared_error', 'neg_mean_squared_log_error', 'neg_root_mean_squared_error', 'neg_mean_poisson_deviance', 'neg_mean_gamma_deviance', 'accuracy', 'top_k_accuracy', 'roc_auc', 'roc_auc_ovr', 'roc_auc_ovo', 'roc_auc_ovr_weighted', 'roc_auc_ovo_weighted', 'balanced_accuracy', 'average_precision', 'neg_log_loss', 'neg_brier_score', 'adjusted_rand_score', 'rand_score', 'homogeneity_score', 'completeness_score', 'v_measure_score', 'mutual_info_score', 'adjusted_mutual_info_score', 'normalized_mutual_info_score', 'fowlkes_mallows_score', 'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'f1', 'f1_macro', 'f1_micro', 'f1_samples', 'f1_weighted', 'jaccard', 'jaccard_macro', 'jaccard_micro', 'jaccard_samples', 'jaccard_weighted'])
+Testing model on Train
+### 2023-01-04_18-26-38 ###
+Model,Total Compile Time,Total Sample Size,Compile Time Per Sample,train-accuracy_score,test-accuracy_score,train-precision_score,test-precision_score,train-recall_score,test-recall_score,train-f1_score,test-f1_score,train-time,test-time
+Getting ground truth file...[1/4]
+Converting test json files to csv files and expanding columns...[2/4]
+Cleaning data...[3/4]
+Done!
+First result:
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(1479, 22)
+Merging... [4/4]
+Done!
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Quick stats on clean, merged and sorted data
+Getting Data Sets..
+Time elapsed: (hh:mm:ss:ms) 0:00:00.006381
+Quick stats on features and answers for the train-val-test split
+Verifying the features and answers for the sets add up
+Adding up X
+Sum: 1.0
+Adding up Y
+Sum: 1.0
+Building LSTM
+### 2023-01-04_19-47-56 ###
+Getting ground truth file...[1/4]
+Converting test json files to csv files and expanding columns...[2/4]
+Cleaning data...[3/4]
+Done!
+First result:
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(1479, 22)
+Merging... [4/4]
+Done!
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Quick stats on clean, merged and sorted data
+Getting Data Sets..
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005025
+Quick stats on features and answers for the train-val-test split
+Verifying the features and answers for the sets add up
+Adding up X
+Sum: 1.0
+Adding up Y
+Sum: 1.0
+Building LSTM
+Possible tests: dict_keys(['explained_variance', 'r2', 'max_error', 'matthews_corrcoef', 'neg_median_absolute_error', 'neg_mean_absolute_error', 'neg_mean_absolute_percentage_error', 'neg_mean_squared_error', 'neg_mean_squared_log_error', 'neg_root_mean_squared_error', 'neg_mean_poisson_deviance', 'neg_mean_gamma_deviance', 'accuracy', 'top_k_accuracy', 'roc_auc', 'roc_auc_ovr', 'roc_auc_ovo', 'roc_auc_ovr_weighted', 'roc_auc_ovo_weighted', 'balanced_accuracy', 'average_precision', 'neg_log_loss', 'neg_brier_score', 'adjusted_rand_score', 'rand_score', 'homogeneity_score', 'completeness_score', 'v_measure_score', 'mutual_info_score', 'adjusted_mutual_info_score', 'normalized_mutual_info_score', 'fowlkes_mallows_score', 'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'f1', 'f1_macro', 'f1_micro', 'f1_samples', 'f1_weighted', 'jaccard', 'jaccard_macro', 'jaccard_micro', 'jaccard_samples', 'jaccard_weighted'])
+Testing model on Train
+### 2023-01-05_10-15-14 ###
+Model,Total Compile Time,Total Sample Size,Compile Time Per Sample,train-accuracy_score,test-accuracy_score,train-precision_score,test-precision_score,train-recall_score,test-recall_score,train-f1_score,test-f1_score,train-time,test-time
+Getting ground truth file...[1/4]
+Converting test json files to csv files and expanding columns...[2/4]
+Cleaning data...[3/4]
+Done!
+First result:
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(1479, 22)
+Merging... [4/4]
+Done!
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Quick stats on clean, merged and sorted data
+Getting Data Sets..
+Time elapsed: (hh:mm:ss:ms) 0:00:00.006876
+Quick stats on features and answers for the train-val-test split
+Verifying the features and answers for the sets add up
+Adding up X
+Sum: 1.0
+Adding up Y
+Sum: 1.0
+Building LSTM
+Possible tests: dict_keys(['explained_variance', 'r2', 'max_error', 'matthews_corrcoef', 'neg_median_absolute_error', 'neg_mean_absolute_error', 'neg_mean_absolute_percentage_error', 'neg_mean_squared_error', 'neg_mean_squared_log_error', 'neg_root_mean_squared_error', 'neg_mean_poisson_deviance', 'neg_mean_gamma_deviance', 'accuracy', 'top_k_accuracy', 'roc_auc', 'roc_auc_ovr', 'roc_auc_ovo', 'roc_auc_ovr_weighted', 'roc_auc_ovo_weighted', 'balanced_accuracy', 'average_precision', 'neg_log_loss', 'neg_brier_score', 'adjusted_rand_score', 'rand_score', 'homogeneity_score', 'completeness_score', 'v_measure_score', 'mutual_info_score', 'adjusted_mutual_info_score', 'normalized_mutual_info_score', 'fowlkes_mallows_score', 'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'f1', 'f1_macro', 'f1_micro', 'f1_samples', 'f1_weighted', 'jaccard', 'jaccard_macro', 'jaccard_micro', 'jaccard_samples', 'jaccard_weighted'])
+Testing model on Train
+Time elapsed: (hh:mm:ss:ms) 0:00:23.837796
+train-accuracy_score: 0.9997150502998167
+train-precision_score: 0.9997388336554411
+train-recall_score: 0.9996000930792692
+train-f1_score: 0.9996694236530789
+Testing model on test
+Time elapsed: (hh:mm:ss:ms) 0:00:05.659150
+test-accuracy_score: 0.9905852039046628
+test-precision_score: 0.9896947755223799
+test-recall_score: 0.9870951830275125
+test-f1_score: 0.9883840344207673
+Model,Total Compile Time,Total Sample Size,Compile Time Per Sample,train-accuracy_score,test-accuracy_score,train-precision_score,test-precision_score,train-recall_score,test-recall_score,train-f1_score,test-f1_score,train-time,test-time
+LSTM,"-1 day, 23:59:59.999995",80716,-6.194558699638239e-11,0.9997150502998167,0.9905852039046628,0.9997388336554411,0.9896947755223799,0.9996000930792692,0.9870951830275125,0.9996694236530789,0.9883840344207673,0.00029532925318400316,0.00028041970169961845

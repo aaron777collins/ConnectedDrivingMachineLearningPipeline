@@ -26,3 +26,5 @@ urllib3
 Werkzeug
 EasyMLLib
 tensorflow
+pyyaml
+h5py

@@ -1,6 +1,7 @@
 from cgi import test
 from datetime import datetime as dt
 import os.path as path
+from pathlib import Path
 from typing import Tuple
 
 import numpy as np
@@ -37,6 +38,8 @@ from tensorflow.keras import layers
 from tensorflow import math as mathtf
 import tensorflow as tf
 
+import os
+
 # DIB_NAME = "DIB1"
 # DATASETS_PATH = path.join(DIB_NAME, 'dataRaw', 'ID')
 # SELECTED_DATA_SET_PATH = path.join("Single", "ET")
@@ -49,10 +52,12 @@ MODEL_FILE_NAME_BEGINNING = "model-"
 MODEL_EXT = ".model"
 MODEL_NAME = "LSTM"
 
+MODELS_FOLDER = "models"
+
 # BATCH_SIZE = 128
 BATCH_SIZE = 5000
 # 3 times the number of cols in the data
-EPOCHS = 2
+EPOCHS = 10
 
 # TESTS = ['accuracy', 'precision_micro', 'recall_micro', 'f1_micro', 'precision_macro', 'recall_macro', 'f1_macro']
 TESTS = [accuracy_score, precision_score, recall_score, f1_score]
@@ -80,22 +85,17 @@ CSV_FORMAT = {CSV_COLUMNS[i]: i for i in range(len(CSV_COLUMNS))}
 
 NUM_INPUTS = 21
 
-
 # PARAM
 OVERWRITE_MODEL = True
 
-def RoundLayer(tensor):
-    return round_0_or_1(mathtf.round(tensor))
+class ModelTrainerSCSortedByTimeLSTM:
 
-
-@tf.function
-def round_0_or_1(number) -> float:
-    if (number == 0):
-        return 0.0
-    else:
-        return 1.0
-
-class ModelTrainerSortedByTime:
+    @staticmethod
+    def round_0_or_1(number) -> float:
+        if (number < 0.5):
+            return 0.0
+        else:
+            return 1.0
 
     def get_uncompiled_model(self):
         LSTMModel = keras.Sequential()
@@ -108,7 +108,7 @@ class ModelTrainerSortedByTime:
         #  13000000
         #  12491236
         # 12500000
-        LSTMModel.add(layers.Embedding(input_dim=13000000, output_dim=1000, input_length=13))
+        LSTMModel.add(layers.Embedding(input_dim=60000, output_dim=1000, input_length=NUM_INPUTS))
 
         # Add a LSTM layer with 128 internal units.
         # Changing to different amount
@@ -118,10 +118,8 @@ class ModelTrainerSortedByTime:
         # sigmoid is the proper activation function for binary classification
         LSTMModel.add(layers.Dense(1, activation='sigmoid'))
 
-        # Add rounding layer
-        LSTMModel.add(layers.Lambda(RoundLayer, name="RoundingLayer"))
-
         LSTMModel.summary()
+
         return LSTMModel
 
 # Q: what is the proper optimizer for binary classification with tensorflow?
@@ -136,14 +134,14 @@ class ModelTrainerSortedByTime:
                  keras.metrics.Recall()])
         return LSTMModel
 
-
     def main(self):
 
         id = "SC-concat"
 
         print(f"Creating Logger for model with id:{id}")
-        self.logger = Logger( f"Model-{id}-merged-sorted-LSTM.txt")
-        self.csvWriter = CSVWriter(f"Models-{id}-merged-sorted-LSTM.csv", CSV_COLUMNS)
+        modelIDStr = f"Model-{id}-merged-sorted-LSTM-v1.2"
+        self.logger = Logger( modelIDStr + ".txt")
+        self.csvWriter = CSVWriter(modelIDStr + ".csv", CSV_COLUMNS)
 
         self.logger.log("Getting ground truth file...[1/4]")
         groundTruthData = DataGatherer.gatherData(DataGatherer.DATA_PATH, DataGatherer.GROUND_TRUTH_FILENAME, DataGatherer.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
@@ -226,23 +224,32 @@ class ModelTrainerSortedByTime:
 
         # model = ModelSaver[StackingClassifier]().readModel(model_name)
 
-        # if(not model or OVERWRITE_MODEL):
-        self.logger.log(f"Building Model on: {MODEL_NAME}")
+        Path(MODELS_FOLDER).mkdir(parents=True, exist_ok=True)
 
-        startTime = dt.now()
+        model = None
 
-        [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
-        modelCompileTime = (dt.now()-startTime)
-        self.logger.log(
-            f"Time elapsed: (hh:mm:ss:ms) {modelCompileTime}")
+        modelPathStr = os.path.join(MODELS_FOLDER, modelIDStr)
 
-        self.logger.log("History: ", str(history.history))
+        try:
+            model = keras.models.load_model(modelPathStr)
+        except IOError:
 
-        # self.logger.log(f"Saving Model as: {model_name}")
-        # startTime = dt.now()
-        # ModelSaver().saveModel(model, model_name)
-        # self.logger.log(
-        #     f"Time elapsed: (hh:mm:ss:ms) {dt.now()-startTime}")
+            self.logger.log(f"Building Model on: {MODEL_NAME}")
+
+            startTime = dt.now()
+
+            [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
+            modelCompileTime = (dt.now()-startTime)
+            self.logger.log(
+                f"Time elapsed: (hh:mm:ss:ms) {modelCompileTime}")
+
+            self.logger.log("History: ", str(history.history))
+
+            self.logger.log(f"Saving Model as: {model_name}")
+            startTime = dt.now()
+            model.save(modelPathStr)
+            self.logger.log(
+                f"Time elapsed: (hh:mm:ss:ms) {dt.now()-startTime}")
 
         row = [" "] * len(CSV_COLUMNS)
         row[CSV_FORMAT["Model"]] = MODEL_NAME
@@ -261,43 +268,17 @@ class ModelTrainerSortedByTime:
         row[CSV_FORMAT[f"train-time"]] = timeElapsed.total_seconds() / \
             len(X_train.index)
 
+        # convert (n,1) to (n,) and then map to round
+        y_pred_transposed_rounded = list(map(ModelTrainerSCSortedByTimeLSTM.round_0_or_1, np.transpose(y_pred)[0]))
+
         for test_type in TESTS:
             res = None
             if (test_type.__name__ == accuracy_score.__name__):
-                res = test_type(Y_train, y_pred)
+                res = test_type(Y_train, y_pred_transposed_rounded)
             else:
-                res = test_type(Y_train, y_pred, average='macro')
+                res = test_type(Y_train, y_pred_transposed_rounded, average='macro')
             self.logger.log(f"train-{test_type.__name__}:", res)
             row[CSV_FORMAT[f"train-{test_type.__name__}"]] = res
-
-        # self.logger.log("Testing model on val")
-        # startTime = dt.now()
-        # y_pred = model.predict(X_val)
-        # timeElapsed = dt.now()-startTime
-        # self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
-        # row[CSV_FORMAT[f"val-time"]] = timeElapsed.total_seconds() / \
-        #     len(X_val.index)
-        # for test_type in TESTS:
-        #     res = None
-        #     if (test_type.__name__ == accuracy_score.__name__):
-        #         res = test_type(Y_val, y_pred)
-        #     else:
-        #         res = test_type(Y_val, y_pred, average='macro')
-        #     self.logger.log(f"val-{test_type.__name__}:", res)
-        #     row[CSV_FORMAT[f"val-{test_type.__name__}"]] = res
-
-        #     self.logger.log("Testing model on Val")
-        # for test_type in TESTS:
-        #     startTime = dt.now()
-        #     res = cross_val_score(
-        #         model, X_val, Y_val, cv=5, scoring=test_type)
-        #     self.logger.log(f"Tested {test_type}", res)
-        #     timeElapsed = dt.now()-startTime
-        #     self.logger.log(
-        #         f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
-        #     row[CSV_FORMAT[f"val-{test_type}"]] = res
-        #     row[CSV_FORMAT[f"val-{test_type}-time"]
-        #         ] = timeElapsed.total_seconds() / len(X_val.index)
 
         self.logger.log("Testing model on test")
         startTime = dt.now()
@@ -306,12 +287,16 @@ class ModelTrainerSortedByTime:
         self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
         row[CSV_FORMAT[f"test-time"]] = timeElapsed.total_seconds() / \
             len(X_test.index)
+
+        # convert (n,1) to (n,) and then map to round
+        y_pred_transposed_rounded = list(map(ModelTrainerSCSortedByTimeLSTM.round_0_or_1, np.transpose(y_pred)[0]))
+
         for test_type in TESTS:
             res = None
             if (test_type.__name__ == accuracy_score.__name__):
-                res = test_type(Y_test, y_pred)
+                res = test_type(Y_test, y_pred_transposed_rounded)
             else:
-                res = test_type(Y_test, y_pred, average='macro')
+                res = test_type(Y_test, y_pred_transposed_rounded, average='macro')
             self.logger.log(f"test-{test_type.__name__}:", res)
             row[CSV_FORMAT[f"test-{test_type.__name__}"]] = res
 
@@ -358,4 +343,4 @@ class ModelTrainerSortedByTime:
 
 
 if __name__ == "__main__":
-    ModelTrainerSortedByTime().main()
+    ModelTrainerSCSortedByTimeLSTM().main()

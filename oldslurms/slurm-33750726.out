@@ -1,0 +1,102 @@
+2023-01-04 18:21:48.193250: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-04 18:21:59.850708: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-01-04 18:23:33.485255: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2023-01-04 18:23:33.487784: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2023-01-04 18:23:33.487822: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-01-04 18:28:01.438660: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2023-01-04 18:28:01.473018: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2023-01-04 18:28:01.473383: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (bc11321.int.ets1.calculquebec.ca): /proc/driver/nvidia/version does not exist
+2023-01-04 18:28:01.531422: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-04 18:28:02.970430: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 52000000000 exceeds 10% of free system memory.
+2023-01-04 18:28:26.351457: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 52000000000 exceeds 10% of free system memory.
+2023-01-04 18:28:26.584833: W tensorflow/core/framework/op_kernel.cc:1780] OP_REQUIRES failed at cwise_ops_common.h:137 : RESOURCE_EXHAUSTED: OOM when allocating tensor with shape[13000000,1000] and type float on /job:localhost/replica:0/task:0/device:CPU:0 by allocator cpu
+Creating Logger for model with id:SC-concat
+### 2023-01-04_18-26-38 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(1479, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.006381 
+Quick stats on features and answers for the train-val-test split 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 21 columns]
+(80716, 21)
+   isAttacker
+0           0
+1           1
+2           0
+3           0
+4           0
+(80716, 1)
+            rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+80716  53064.427500  53064.427500  4773.0  ...        0        1        1
+80717  53064.802978  53064.802978  4731.0  ...        1        0        0
+80718  53064.852437  53064.852437  4737.0  ...        0        0        0
+80719  53065.213423  53065.213423  4725.0  ...        1        0        0
+80720  53065.355988  53065.355988  4719.0  ...        0        0        0
+
+[5 rows x 21 columns]
+(20181, 21)
+       isAttacker
+80716           1
+80717           1
+80718           0
+80719           0
+80720           0
+(20181, 1)
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Traceback (most recent call last):
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 344, in <module>
+    ModelTrainerSCSortedByTimeLSTM().main()
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 236, in main
+    model = keras.models.load_model(modelPathStr)
+  File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/backend.py", line 2100, in random_uniform
+    return tf.random.stateless_uniform(
+tensorflow.python.framework.errors_impl.ResourceExhaustedError: {{function_node __wrapped__Mul_device_/job:localhost/replica:0/task:0/device:CPU:0}} OOM when allocating tensor with shape[13000000,1000] and type float on /job:localhost/replica:0/task:0/device:CPU:0 by allocator cpu [Op:Mul]
