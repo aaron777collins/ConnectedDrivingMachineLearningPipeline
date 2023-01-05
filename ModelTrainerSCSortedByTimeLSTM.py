@@ -260,9 +260,12 @@ class ModelTrainerSCSortedByTimeLSTM:
 
         self.logger.log(f"Possible tests:", metrics.SCORERS.keys())
 
+        roundNums = lambda x: ModelTrainerSCSortedByTimeLSTM.round_0_or_1(x)
+
         self.logger.log("Testing model on Train")
         startTime = dt.now()
-        y_pred = model.predict(X_train)
+        y_pred = roundNums(model.predict(X_train))
+
         timeElapsed = dt.now()-startTime
         self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
         row[CSV_FORMAT[f"train-time"]] = timeElapsed.total_seconds() / \
@@ -282,7 +285,7 @@ class ModelTrainerSCSortedByTimeLSTM:
 
         self.logger.log("Testing model on test")
         startTime = dt.now()
-        y_pred = model.predict(X_test)
+        y_pred = roundNums(model.predict(X_test))
         timeElapsed = dt.now()-startTime
         self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
         row[CSV_FORMAT[f"test-time"]] = timeElapsed.total_seconds() / \
