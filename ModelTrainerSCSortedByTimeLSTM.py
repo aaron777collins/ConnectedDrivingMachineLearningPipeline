@@ -107,8 +107,10 @@ class ModelTrainerSCSortedByTimeLSTM:
         #  60000, 1000
         #  13000000
         #  12491236
-        # 12500000
-        LSTMModel.add(layers.Embedding(input_dim=60000, output_dim=1000, input_length=NUM_INPUTS))
+        # 12500000                             12500000
+        #                                      1033395
+        # 1250000
+        LSTMModel.add(layers.Embedding(input_dim=1250000, output_dim=1000, input_length=NUM_INPUTS))
 
         # Add a LSTM layer with 128 internal units.
         # Changing to different amount
