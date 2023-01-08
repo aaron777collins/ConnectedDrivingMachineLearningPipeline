@@ -110,7 +110,35 @@ class ModelTrainerSCSortedByTimeLSTM:
         # 12500000                             12500000
         #                                      1033395
         # 1250000
-        LSTMModel.add(layers.Embedding(input_dim=1250000, output_dim=1000, input_length=NUM_INPUTS))
+        # rcvTime         5.418034e+04
+        # sendTime        5.418034e+04
+        # sender          6.123000e+03
+        # senderPseudo    1.061235e+06 # = 1061235 -> round up -> 1070000
+        # isAttacker      1.000000e+00
+        # posX            1.395715e+03
+        # posY            1.359091e+03
+        # spdX            1.816491e+01
+        # spdY            1.793936e+01
+        # aclX            4.501414e+00
+        # aclY            4.499957e+00
+        # hedX            1.000000e+00
+        # hedY            1.000000e+00
+        # posXNeg         0.000000e+00
+        # posYNeg         0.000000e+00
+        # spdXNeg         1.000000e+00
+        # spdYNeg         1.000000e+00
+        # aclXNeg         1.000000e+00
+        # aclYNeg         1.000000e+00
+        # hedXNeg         1.000000e+00
+        # hedYNeg         1.000000e+00
+        # dtype: float64
+
+        # output layer is supposed to be the 4th root of the number of categories
+        # Even if we assume that worst case we have 1070000 categories, it would be 32.16
+        # Another website suggests dividing the number of unique categories by 2 and putting a max of 50
+        # Thus, to be safe, we will use the number 50 because it's always better to be safe.
+
+        LSTMModel.add(layers.Embedding(input_dim=1070000, output_dim=50, input_length=NUM_INPUTS))
 
         # Add a LSTM layer with 128 internal units.
         # Changing to different amount
@@ -141,7 +169,7 @@ class ModelTrainerSCSortedByTimeLSTM:
         id = "SC-concat"
 
         print(f"Creating Logger for model with id:{id}")
-        modelIDStr = f"Model-{id}-merged-sorted-LSTM-v1.2"
+        modelIDStr = f"Model-{id}-merged-sorted-LSTM-v2"
         self.logger = Logger( modelIDStr + ".txt")
         self.csvWriter = CSVWriter(modelIDStr + ".csv", CSV_COLUMNS)
 
@@ -161,7 +189,7 @@ class ModelTrainerSCSortedByTimeLSTM:
         #         print(cleanedTestFile.head(2))
 
         self.logger.log("Merging... [4/4]")
-        data = DataCleaner.getCleanMergedSortedData()
+        data = DataCleaner.getCleanMergedDataWithoutMsgID()
         self.logger.log("Done!")
         self.logger.log(str(data.head(5)))
         self.logger.log(str(data.shape))

@@ -1,0 +1,165 @@
+2023-01-06 01:24:26.627771: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-06 01:24:34.452073: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-01-06 01:25:49.692146: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2023-01-06 01:25:49.694246: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2023-01-06 01:25:49.694281: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-01-06 01:28:13.872133: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2023-01-06 01:28:13.874720: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2023-01-06 01:28:13.874908: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (bl12405.int.ets1.calculquebec.ca): /proc/driver/nvidia/version does not exist
+2023-01-06 01:28:13.926531: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Creating Logger for model with id:SC-concat
+### 2023-01-06_01-27-29 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(1479, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(100897, 22) 
+Quick stats on clean, merged and sorted data 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns]
+(100897, 22)
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004928 
+Quick stats on features and answers for the train-val-test split 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 21 columns]
+(80716, 21)
+   isAttacker
+0           0
+1           1
+2           0
+3           0
+4           0
+(80716, 1)
+            rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+80716  53064.427500  53064.427500  4773.0  ...        0        1        1
+80717  53064.802978  53064.802978  4731.0  ...        1        0        0
+80718  53064.852437  53064.852437  4737.0  ...        0        0        0
+80719  53065.213423  53065.213423  4725.0  ...        1        0        0
+80720  53065.355988  53065.355988  4719.0  ...        0        0        0
+
+[5 rows x 21 columns]
+(20181, 21)
+       isAttacker
+80716           1
+80717           1
+80718           0
+80719           0
+80720           0
+(20181, 1)
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding (Embedding)       (None, 21, 2000)          2600000000
+                                                                 
+ lstm (LSTM)                 (None, 128)               1090048   
+                                                                 
+ dense (Dense)               (None, 1)                 129       
+                                                                 
+=================================================================
+Total params: 2,601,090,177
+Trainable params: 2,601,090,177
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/10
+Traceback (most recent call last):
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 351, in <module>
+    ModelTrainerSCSortedByTimeLSTM().main()
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 243, in main
+    [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
+  File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 345, in buildModel
+    history = model.fit(features, answers, batch_size=BATCH_SIZE, epochs=EPOCHS)
+  File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/home/colli11s/ENV/lib/python3.10/site-packages/tensorflow/python/eager/execute.py", line 54, in quick_execute
+    tensors = pywrap_tfe.TFE_Py_Execute(ctx._handle, device_name, op_name,
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Graph execution error:
+
+Detected at node 'sequential/embedding/embedding_lookup' defined at (most recent call last):
+    File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 351, in <module>
+      ModelTrainerSCSortedByTimeLSTM().main()
+    File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 243, in main
+      [model, history] = self.buildModel(X_train, Y_train, self.get_compiled_model())
+    File "/lustre03/project/6063935/colli11s/ConnectedDrivingMachineLearningPipeline/ModelTrainerSCSortedByTimeLSTM.py", line 345, in buildModel
+      history = model.fit(features, answers, batch_size=BATCH_SIZE, epochs=EPOCHS)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1564, in fit
+      tmp_logs = self.train_function(iterator)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1160, in train_function
+      return step_function(self, iterator)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1146, in step_function
+      outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 1135, in run_step
+      outputs = model.train_step(data)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 993, in train_step
+      y_pred = self(x, training=True)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/training.py", line 557, in __call__
+      return super().__call__(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/base_layer.py", line 1097, in __call__
+      outputs = call_fn(inputs, *args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 96, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/sequential.py", line 410, in call
+      return super().call(inputs, training=training, mask=mask)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/functional.py", line 510, in call
+      return self._run_internal_graph(inputs, training=training, mask=mask)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/functional.py", line 667, in _run_internal_graph
+      outputs = node.layer(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 65, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/engine/base_layer.py", line 1097, in __call__
+      outputs = call_fn(inputs, *args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/utils/traceback_utils.py", line 96, in error_handler
+      return fn(*args, **kwargs)
+    File "/home/colli11s/ENV/lib/python3.10/site-packages/keras/layers/core/embedding.py", line 208, in call
+      out = tf.nn.embedding_lookup(self.embeddings, inputs)
+Node: 'sequential/embedding/embedding_lookup'
+indices[3949,4] = 3192929 is not in [0, 1300000)
+	 [[{{node sequential/embedding/embedding_lookup}}]] [Op:__inference_train_function_3392]

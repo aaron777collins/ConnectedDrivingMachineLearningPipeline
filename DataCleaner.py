@@ -12,7 +12,7 @@ import numpy as np
 class DataCleaner:
 
     POPULATED_DATA_PATH = path.join("data", "populatedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
-    CLEANED_DATA_PATH = path.join("data", "cleanedData", "VeReMi_50400_54000_2022-9-11_19.11.57")
+    CLEANED_DATA_PATH = path.join("data", "cleanedDatav2", "VeReMi_50400_54000_2022-9-11_19.11.57")
     MERGED_CLEANED_DATA_FILE = path.join(CLEANED_DATA_PATH, "mergedData.csv")
     MERGED_CLEANED_SORTED_DATA_FILE = path.join(CLEANED_DATA_PATH, "mergedSortedData.csv")
     IS_ATTACKER_DATA_PATH = path.join("data", "isAttacker", "VeReMi_50400_54000_2022-9-11_19.11.57")
@@ -154,10 +154,16 @@ class DataCleaner:
         df.drop('receiverID', axis=1, inplace=True)
         df.drop('type', axis=1, inplace=True)
         df.drop('index', axis=1, inplace=True)
-        df.drop('level_0', axis=1, inplace=True)
+        df.drop('level_0', axis=1, inplace=True)\
+
         # df.drop('senderPseudo', axis=1, inplace=True)
         # df.drop('sender', axis=1, inplace=True)
         return df
+
+    @staticmethod
+    def removeMessageID(df: DataFrame) -> DataFrame:
+        return df.drop('messageID', axis=1)
+
 
     @staticmethod
     def getMaliciousFiles() -> List[int]:
@@ -222,6 +228,9 @@ class DataCleaner:
             mergedDf.to_csv(DataCleaner.MERGED_CLEANED_DATA_FILE, index=False)
             return mergedDf
 
+    def getCleanMergedDataWithoutMsgID() -> DataFrame:
+        return DataCleaner.removeMessageID(DataCleaner.getCleanMergedData())
+
     @staticmethod
     def getCleanMergedSortedData() -> DataFrame:
         pathlib.Path(DataCleaner.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
@@ -260,10 +269,12 @@ if (__name__ == "__main__"):
     #         print(cleanedTestFile.head(2))
 
     print("Merging... [4/4]")
-    mergedCleanedTestFiles = DataCleaner.getCleanMergedData()
+    mergedCleanedTestFiles = DataCleaner.getCleanMergedDataWithoutMsgID()
     print("Done!")
     print(mergedCleanedTestFiles.head(5))
     print(mergedCleanedTestFiles.shape)
 
     print(mergedCleanedTestFiles["isAttacker"].value_counts())
+
+    print(mergedCleanedTestFiles.max())
 
