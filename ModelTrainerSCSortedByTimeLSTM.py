@@ -83,7 +83,8 @@ CSV_COLUMNS.extend(TESTS_WITH_SAMPLE_NAMES)
 
 CSV_FORMAT = {CSV_COLUMNS[i]: i for i in range(len(CSV_COLUMNS))}
 
-NUM_INPUTS = 21
+# Was 21 but removed messageID
+NUM_INPUTS = 20
 
 # PARAM
 OVERWRITE_MODEL = True

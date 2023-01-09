@@ -1,0 +1,37 @@
+### 2023-01-08_15-51-08 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 22 columns] 
+(1479, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  ...  aclYNeg  hedXNeg  hedYNeg
+0  51865.472964  51865.472964  2667.0  ...        0        1        0
+1  51865.488467  51865.488467  2673.0  ...        0        1        0
+2  51865.585766  51865.585766  2799.0  ...        0        1        0
+3  51865.808674  51865.808674  2661.0  ...        1        1        0
+4  51866.472956  51866.472956  2667.0  ...        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.008371 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building LSTM 
+Building Model on: LSTM 
