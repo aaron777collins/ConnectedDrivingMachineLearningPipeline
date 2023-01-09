@@ -291,11 +291,9 @@ class ModelTrainerSCSortedByTimeLSTM:
 
         self.logger.log(f"Possible tests:", metrics.SCORERS.keys())
 
-        roundNums = lambda x: ModelTrainerSCSortedByTimeLSTM.round_0_or_1(x)
-
         self.logger.log("Testing model on Train")
         startTime = dt.now()
-        y_pred = roundNums(model.predict(X_train))
+        y_pred = model.predict(X_train)
 
         timeElapsed = dt.now()-startTime
         self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
@@ -303,6 +301,7 @@ class ModelTrainerSCSortedByTimeLSTM:
             len(X_train.index)
 
         # convert (n,1) to (n,) and then map to round
+        print(y_pred)
         y_pred_transposed_rounded = list(map(ModelTrainerSCSortedByTimeLSTM.round_0_or_1, np.transpose(y_pred)[0]))
 
         for test_type in TESTS:
@@ -316,13 +315,14 @@ class ModelTrainerSCSortedByTimeLSTM:
 
         self.logger.log("Testing model on test")
         startTime = dt.now()
-        y_pred = roundNums(model.predict(X_test))
+        y_pred = model.predict(X_test)
         timeElapsed = dt.now()-startTime
         self.logger.log(f"Time elapsed: (hh:mm:ss:ms) {timeElapsed}")
         row[CSV_FORMAT[f"test-time"]] = timeElapsed.total_seconds() / \
             len(X_test.index)
 
         # convert (n,1) to (n,) and then map to round
+        print(y_pred)
         y_pred_transposed_rounded = list(map(ModelTrainerSCSortedByTimeLSTM.round_0_or_1, np.transpose(y_pred)[0]))
 
         for test_type in TESTS:
