@@ -1,6 +1,7 @@
 /data
 /models
 /cddg-pipeline-env
+sftp*
 __pycache__
 # Byte-compiled / optimized / DLL files
 __pycache__/

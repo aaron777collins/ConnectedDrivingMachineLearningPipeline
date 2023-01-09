@@ -34,7 +34,7 @@ from EasyMLLib.CSVWriter import CSVWriter
 from DataGatherer import DataGatherer
 
 from tensorflow import keras
-from tensorflow.keras import layers
+from keras import layers
 from tensorflow import math as mathtf
 import tensorflow as tf
 
