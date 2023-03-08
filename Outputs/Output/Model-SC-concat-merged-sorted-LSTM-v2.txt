@@ -312,3 +312,385 @@ test-accuracy_score: 0.9936078489668501
 test-precision_score: 0.9908208513349741 
 test-recall_score: 0.99448439822911 
 test-f1_score: 0.992623535191307 
+### 2023-03-08_01-40-36 ### 
+Getting ground truth file...[1/4] 
+### 2023-03-08_01-43-52 ### 
+Getting ground truth file...[1/4] 
+### 2023-03-08_01-49-19 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+### 2023-03-08_01-55-09 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+### 2023-03-08_01-58-49 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+### 2023-03-08_02-03-21 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+### 2023-03-08_02-07-55 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           0  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           0  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           0  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           0  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.006571 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+### 2023-03-08_02-14-30 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           0  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           0  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           0  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           0  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.007181 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+Time elapsed: (hh:mm:ss:ms) 0.03638005256652832 
+### 2023-03-08_02-16-43 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           0  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           0  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           0  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           0  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005378 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+### 2023-03-08_02-17-34 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           0  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           0  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           0  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           0  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005568 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+Time elapsed: (hh:mm:ss:ms) 0.03725695610046387 
+### 2023-03-08_02-24-30 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           0  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           0  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           0  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           0  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005704 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+Time elapsed: (hh:mm:ss:ms) 0.03838014602661133 
+### 2023-03-08_02-25-30 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           0  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           0  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           0  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           0  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.006017 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+Time elapsed: (hh:mm:ss:ms) 0.03891587257385254 
+### 2023-03-08_02-28-13 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           1  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           1  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           1  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           1  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.007985 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+Time elapsed: (hh:mm:ss:ms) 0.46150970458984375 
+### 2023-03-08_02-41-31 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           1  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           1  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           1  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           1  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.006103 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+Time elapsed: (hh:mm:ss:ms) 0.49764204025268555 
+### 2023-03-08_03-06-03 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo   messageID  isAttacker  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0  20932984.0           0  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0  20933368.0           0  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0  20933532.0           1  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0  20933829.0           0  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0  20934380.0           1  ...        0        1        0        0        0        1
+
+[5 rows x 22 columns] 
+(758, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker        posX  ...  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  28156.002815  28156.002815  8703.0     1087032.0           0  147.359353  ...        0        0        0        0        1        1
+1  28156.052898  28156.052898  8469.0     1084692.0           0  139.919476  ...        0        0        0        0        1        0
+2  28156.054348  28156.054348  8811.0     1088112.0           1  243.899705  ...        0        0        1        0        0        1
+3  28156.077092  28156.077092  8439.0     1084392.0           0  196.355385  ...        1        1        1        1        1        1
+4  28156.134624  28156.134624  8751.0     1087512.0           1  243.237644  ...        0        1        0        0        0        1
+
+[5 rows x 21 columns] 
+(183246, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.005288 
+Quick stats on features and answers for the train-val-test split 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLPositionOffset 
+Time elapsed: (ss) 0.4125959873199463 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.4125959873199463 
+test-accuracy_score: 0.9283239202204578 
+test-precision_score: 0.9289938640590398 
+test-recall_score: 0.8866055718924 
+test-f1_score: 0.9048373673132606 
+Time elapsed: (ss) 3.4741528034210205 
+train-accuracy_score: 0.9990108803165183 
+train-precision_score: 0.9987387700941701 
+train-recall_score: 0.9988571227265115 
+train-f1_score: 0.9987979230660154 
+Time elapsed: (ss) 3.4741528034210205 
+test-accuracy_score: 0.9024856074868353 
+test-precision_score: 0.8760633402565152 
+test-recall_score: 0.877906888595887 
+test-f1_score: 0.876977849590262 
+Time elapsed: (ss) 0.005401134490966797 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.005401134490966797 
+test-accuracy_score: 0.9264140132602112 
+test-precision_score: 0.9041975621475136 
+test-recall_score: 0.9115941369298327 
+test-f1_score: 0.9077886156853356 
