@@ -232,6 +232,9 @@ class DataCleanerPosConstOffset:
 
     def getCleanMergedDataWithoutMsgID() -> DataFrame:
         return DataCleanerPosConstOffset.removeMessageID(DataCleanerPosConstOffset.getCleanMergedData())
+    
+    def getCleanMergedSortedDataWithoutMsgID() -> DataFrame:
+        return DataCleanerPosConstOffset.removeMessageID(DataCleanerPosConstOffset.getCleanMergedSortedData())
 
     @staticmethod
     def getCleanMergedSortedData() -> DataFrame:
@@ -246,7 +249,6 @@ class DataCleanerPosConstOffset:
             mergedDf.sort_values(by=['sendTime'])
             mergedDf.to_csv(DataCleanerPosConstOffset.MERGED_CLEANED_SORTED_DATA_FILE, index=False)
             return mergedDf
-
 
 
 

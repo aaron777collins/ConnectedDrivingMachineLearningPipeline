@@ -122,7 +122,7 @@ class ModelTrainerMLPosOffsetConstSCSortedByTime:
         #         print(cleanedTestFile.head(2))
 
         self.logger.log("Merging... [4/4]")
-        data = DataCleanerPosConstOffset.getCleanMergedDataWithoutMsgID()
+        data = DataCleanerPosConstOffset.getCleanMergedSortedDataWithoutMsgID()
         self.logger.log("Done!")
         self.logger.log(str(data.head(5)))
         self.logger.log(str(data.shape))
