@@ -22,7 +22,7 @@ from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 from EasyMLLib.helper import Helper
-from DataClearnConstSpeedOffset import DataClearnConstSpeedOffset
+from DataCleanerConstSpeedOffset import DataCleanerConstSpeedOffset
 from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier, StackingClassifier
 from matplotlib import pyplot as plt
 
@@ -47,7 +47,7 @@ from MClassifierPipeline import MClassifierPipeline
 
 MODEL_FILE_NAME_BEGINNING = "model-"
 MODEL_EXT = ".model"
-MODEL_NAME = "MLPositionOffset"
+MODEL_NAME = "MLConstSpeedOffset"
 
 MODELS_FOLDER = "models"
 
@@ -86,7 +86,7 @@ NUM_INPUTS = 20
 # PARAM
 OVERWRITE_MODEL = True
 
-class ModelTrainerMLPosOffsetConstSCSortedByTime:
+class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
 
     @staticmethod
     def round_0_or_1(number) -> float:
@@ -101,18 +101,18 @@ class ModelTrainerMLPosOffsetConstSCSortedByTime:
         id = "SC-concat"
 
         print(f"Creating Logger for model with id:{id}")
-        modelIDStr = f"Model-{id}-merged-sorted-LSTM-v2"
-        self.logger = Logger( modelIDStr + ".txt")
-        self.csvWriter = CSVWriter(modelIDStr + ".csv", CSV_COLUMNS)
+        modelIDStr = f"CONSTSPEED-Model-{id}-merged-sorted-LSTM-v2"
+        self.logger = Logger( modelIDStr + ".txt") # type: ignore
+        self.csvWriter = CSVWriter(modelIDStr + ".csv", CSV_COLUMNS) # type: ignore
 
         self.logger.log("Getting ground truth file...[1/4]")
-        DataPath = path.join("data", "PosOffsetConst", "VeReMi_25200_28800_2022-9-11_204550")
-        groundTruthData = DataGatherer.gatherData(DataPath, "traceGroundTruthJSON-7.json", DataClearnConstSpeedOffset.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
+        DataPath = path.join("data", "SpeedOffset", "SPEEDCONSTVeReMi_50400_54000_2022-9-11_18_23_0")
+        groundTruthData = DataGatherer.gatherData(DataPath, "traceGroundTruthJSON-14.json", DataCleanerConstSpeedOffset.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
 
         self.logger.log("Converting test json files to csv files and expanding columns...[2/4]")
-        populatedTestFiles = DataClearnConstSpeedOffset.getPopulatedData()
+        populatedTestFiles = DataCleanerConstSpeedOffset.getPopulatedData()
         self.logger.log("Cleaning data...[3/4]")
-        cleanedTestFiles = DataClearnConstSpeedOffset.getCleanData()
+        cleanedTestFiles = DataCleanerConstSpeedOffset.getCleanData()
 
         self.logger.log("Done!")
         self.logger.log("First result:")
@@ -122,7 +122,7 @@ class ModelTrainerMLPosOffsetConstSCSortedByTime:
         #         print(cleanedTestFile.head(2))
 
         self.logger.log("Merging... [4/4]")
-        data = DataClearnConstSpeedOffset.getCleanMergedSortedDataWithoutMsgID()
+        data = DataCleanerConstSpeedOffset.getCleanMergedSortedDataWithoutMsgID()
         self.logger.log("Done!")
         self.logger.log(str(data.head(5)))
         self.logger.log(str(data.shape))
@@ -209,7 +209,7 @@ class ModelTrainerMLPosOffsetConstSCSortedByTime:
             row = [" "] * len(CSV_COLUMNS)
             row[CSV_FORMAT["Model"]] = classifier.classifier.__class__.__name__
             row[CSV_FORMAT["Total Compile Time"]] = classifier.elapsed_train_time
-            row[CSV_FORMAT["Total Sample Size"]] = len(X_train.index)
+            row[CSV_FORMAT["Total Sample Size"]] = len(X_train.index) # type: ignore
             row[CSV_FORMAT["Compile Time Per Sample"]
                 ] = classifier.elapsed_train_time / len(X_train.index)
 
@@ -287,4 +287,4 @@ class ModelTrainerMLPosOffsetConstSCSortedByTime:
 
 
 if __name__ == "__main__":
-    ModelTrainerMLPosOffsetConstSCSortedByTime().main()
+    ModelTrainerMLSpeedOffsetConstSCSortedByTime().main()

@@ -9,25 +9,25 @@ import pathlib
 import glob
 import numpy as np
 
-class DataCleanerPosConstOffset:
+class DataCleanerConstSpeedOffset:
 
-    POPULATED_DATA_PATH = path.join("data", "populatedData", "VeReMi_25200_28800_2022-9-11_204550_ConstPosOffset")
-    CLEANED_DATA_PATH = path.join("data", "cleanedDatav2", "VeReMi_25200_28800_2022-9-11_204550_ConstPosOffset")
+    POPULATED_DATA_PATH = path.join("data", "populatedData", "SPEEDCONSTVeReMi_50400_54000_2022-9-11_18_23_0")
+    CLEANED_DATA_PATH = path.join("data", "cleanedDatav2", "SPEEDCONSTVeReMi_50400_54000_2022-9-11_18_23_0")
     MERGED_CLEANED_DATA_FILE = path.join(CLEANED_DATA_PATH, "mergedData.csv")
     MERGED_CLEANED_SORTED_DATA_FILE = path.join(CLEANED_DATA_PATH, "mergedSortedData.csv")
-    IS_ATTACKER_DATA_PATH = path.join("data", "isAttacker", "VeReMi_25200_28800_2022-9-11_204550_ConstPosOffset")
+    IS_ATTACKER_DATA_PATH = path.join("data", "isAttacker", "SPEEDCONSTVeReMi_50400_54000_2022-9-11_18_23_0")
     IS_ATTACKER_DATA_FILE = path.join(IS_ATTACKER_DATA_PATH, "isattacker.txt")
-    REFINED_DATA_PATH = path.join("data", "refinedData", "VeReMi_25200_28800_2022-9-11_204550_ConstPosOffset")
-    DATA_PATH = path.join("data", "PosOffsetConst", "VeReMi_25200_28800_2022-9-11_204550")
+    REFINED_DATA_PATH = path.join("data", "refinedData", "SPEEDCONSTVeReMi_50400_54000_2022-9-11_18_23_0")
+    DATA_PATH = path.join("data", "SpeedOffset", "SPEEDCONSTVeReMi_50400_54000_2022-9-11_18_23_0")
 
     @staticmethod
-    def populateData(df: DataFrame, fileName: string) -> DataFrame:
+    def populateData(df: DataFrame, fileName: string) -> DataFrame: # type: ignore
 
-        maliciousFilesIDs = DataCleanerPosConstOffset.getMaliciousFiles()
+        maliciousFilesIDs = DataCleanerConstSpeedOffset.getMaliciousFiles()
 
         df.drop(df[df['type'] == 2].index, inplace=True)
         df.reset_index(inplace=True)
-        df['receiverID'] = fileName.split("-")[1]
+        df['receiverID'] = fileName.split("-")[1] # type: ignore
         try:
             df["isAttacker"] = np.where(df["sender"].astype(int).isin(maliciousFilesIDs), 1, 0)
         except Exception as e:
@@ -128,18 +128,18 @@ class DataCleanerPosConstOffset:
 
     @staticmethod
     def getPopulatedData() -> List[DataFrame]:
-        dataFiles = glob.glob(DataCleanerPosConstOffset.DATA_PATH + "/*.json")
+        dataFiles = glob.glob(DataCleanerConstSpeedOffset.DATA_PATH + "/*.json")
         filteredFiles = list(filter(filterGroundTruthPath, dataFiles))
 
         populatedTestFiles = []
 
         for file in filteredFiles:
-            pathlib.Path(DataCleanerPosConstOffset.POPULATED_DATA_PATH).mkdir(parents=True, exist_ok=True)
-            populatedDataFilePath = path.join(DataCleanerPosConstOffset.POPULATED_DATA_PATH, path.basename(file).replace(".json", ".csv"))
+            pathlib.Path(DataCleanerConstSpeedOffset.POPULATED_DATA_PATH).mkdir(parents=True, exist_ok=True)
+            populatedDataFilePath = path.join(DataCleanerConstSpeedOffset.POPULATED_DATA_PATH, path.basename(file).replace(".json", ".csv"))
             if path.isfile(populatedDataFilePath):
-                return pd.read_csv(populatedDataFilePath)
+                return pd.read_csv(populatedDataFilePath) # type: ignore
 
-            populatedTestFile = DataCleanerPosConstOffset.populateData(DataGatherer.gatherData(path.dirname(file), path.basename(file), DataCleanerPosConstOffset.REFINED_DATA_PATH, path.basename(file).replace(".json", ".csv")), path.basename(file).replace(".json", ".csv"))
+            populatedTestFile = DataCleanerConstSpeedOffset.populateData(DataGatherer.gatherData(path.dirname(file), path.basename(file), DataCleanerConstSpeedOffset.REFINED_DATA_PATH, path.basename(file).replace(".json", ".csv")), path.basename(file).replace(".json", ".csv")) # type: ignore
             if (len(populatedTestFile.index) == 0):
                 continue
             populatedTestFiles.append(populatedTestFile)
@@ -171,12 +171,12 @@ class DataCleanerPosConstOffset:
     def getMaliciousFiles() -> List[int]:
         maliciousFileIDs = []
 
-        pathlib.Path(DataCleanerPosConstOffset.IS_ATTACKER_DATA_PATH).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(DataCleanerConstSpeedOffset.IS_ATTACKER_DATA_PATH).mkdir(parents=True, exist_ok=True)
 
-        dataFiles = glob.glob(DataCleanerPosConstOffset.REFINED_DATA_PATH + "/*.csv")
+        dataFiles = glob.glob(DataCleanerConstSpeedOffset.REFINED_DATA_PATH + "/*.csv")
         filteredFiles = list(filter(filterGroundTruthPath, dataFiles))
-        if path.isfile(DataCleanerPosConstOffset.IS_ATTACKER_DATA_FILE):
-            with open(DataCleanerPosConstOffset.IS_ATTACKER_DATA_FILE, 'r') as fp:
+        if path.isfile(DataCleanerConstSpeedOffset.IS_ATTACKER_DATA_FILE):
+            with open(DataCleanerConstSpeedOffset.IS_ATTACKER_DATA_FILE, 'r') as fp:
                 for line in fp:
                     # remove linebreak from a current name
                     # linebreak is the last character of each line
@@ -194,7 +194,7 @@ class DataCleanerPosConstOffset:
                 if (baseName.split("-")[3] != "A0"):
                     maliciousFileIDs.append(int(baseName.split("-")[1]))
 
-            with open(DataCleanerPosConstOffset.IS_ATTACKER_DATA_FILE, 'w') as fp:
+            with open(DataCleanerConstSpeedOffset.IS_ATTACKER_DATA_FILE, 'w') as fp:
                 for item in maliciousFileIDs:
                     # write each item on a new line
                     fp.write("%d\n" % item)
@@ -203,51 +203,51 @@ class DataCleanerPosConstOffset:
     @staticmethod
     def getCleanData() -> List[DataFrame]:
         cleanedTestFiles = []
-        dataFiles = glob.glob(DataCleanerPosConstOffset.POPULATED_DATA_PATH + "/*.csv")
-        pathlib.Path(DataCleanerPosConstOffset.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
+        dataFiles = glob.glob(DataCleanerConstSpeedOffset.POPULATED_DATA_PATH + "/*.csv")
+        pathlib.Path(DataCleanerConstSpeedOffset.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
         for file in dataFiles:
-            cleanedDataFilePath = path.join(DataCleanerPosConstOffset.CLEANED_DATA_PATH, path.basename(file))
+            cleanedDataFilePath = path.join(DataCleanerConstSpeedOffset.CLEANED_DATA_PATH, path.basename(file))
 
             if path.isfile(cleanedDataFilePath):
                 cleanedTestFiles.append(pd.read_csv(cleanedDataFilePath))
             else:
                 cleanedTestFile = None
-                cleanedTestFile = DataCleanerPosConstOffset.cleanData(pd.read_csv(file))
+                cleanedTestFile = DataCleanerConstSpeedOffset.cleanData(pd.read_csv(file))
                 cleanedTestFile.to_csv(cleanedDataFilePath, index=False)
                 cleanedTestFiles.append(cleanedTestFile)
         return cleanedTestFiles
 
     @staticmethod
     def getCleanMergedData() -> DataFrame:
-        pathlib.Path(DataCleanerPosConstOffset.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(DataCleanerConstSpeedOffset.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
 
-        if path.isfile(DataCleanerPosConstOffset.MERGED_CLEANED_DATA_FILE):
-            return pd.read_csv(DataCleanerPosConstOffset.MERGED_CLEANED_DATA_FILE)
+        if path.isfile(DataCleanerConstSpeedOffset.MERGED_CLEANED_DATA_FILE):
+            return pd.read_csv(DataCleanerConstSpeedOffset.MERGED_CLEANED_DATA_FILE)
         else:
-            dfs = DataCleanerPosConstOffset.getCleanData()
+            dfs = DataCleanerConstSpeedOffset.getCleanData()
             mergedDf = pd.concat(dfs, axis=0, ignore_index=True)
             mergedDf.drop_duplicates(subset=['sender', 'messageID'], inplace=True)
-            mergedDf.to_csv(DataCleanerPosConstOffset.MERGED_CLEANED_DATA_FILE, index=False)
+            mergedDf.to_csv(DataCleanerConstSpeedOffset.MERGED_CLEANED_DATA_FILE, index=False)
             return mergedDf
 
     def getCleanMergedDataWithoutMsgID() -> DataFrame:
-        return DataCleanerPosConstOffset.removeMessageID(DataCleanerPosConstOffset.getCleanMergedData())
+        return DataCleanerConstSpeedOffset.removeMessageID(DataCleanerConstSpeedOffset.getCleanMergedData())
     
     def getCleanMergedSortedDataWithoutMsgID() -> DataFrame:
-        return DataCleanerPosConstOffset.removeMessageID(DataCleanerPosConstOffset.getCleanMergedSortedData())
+        return DataCleanerConstSpeedOffset.removeMessageID(DataCleanerConstSpeedOffset.getCleanMergedSortedData())
 
     @staticmethod
     def getCleanMergedSortedData() -> DataFrame:
-        pathlib.Path(DataCleanerPosConstOffset.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(DataCleanerConstSpeedOffset.CLEANED_DATA_PATH).mkdir(parents=True, exist_ok=True)
 
-        if path.isfile(DataCleanerPosConstOffset.MERGED_CLEANED_SORTED_DATA_FILE):
-            return pd.read_csv(DataCleanerPosConstOffset.MERGED_CLEANED_SORTED_DATA_FILE)
+        if path.isfile(DataCleanerConstSpeedOffset.MERGED_CLEANED_SORTED_DATA_FILE):
+            return pd.read_csv(DataCleanerConstSpeedOffset.MERGED_CLEANED_SORTED_DATA_FILE)
         else:
-            dfs = DataCleanerPosConstOffset.getCleanData()
+            dfs = DataCleanerConstSpeedOffset.getCleanData()
             mergedDf = pd.concat(dfs, axis=0, ignore_index=True)
             mergedDf.drop_duplicates(subset=['sender', 'messageID'], inplace=True)
             mergedDf.sort_values(by=['sendTime'])
-            mergedDf.to_csv(DataCleanerPosConstOffset.MERGED_CLEANED_SORTED_DATA_FILE, index=False)
+            mergedDf.to_csv(DataCleanerConstSpeedOffset.MERGED_CLEANED_SORTED_DATA_FILE, index=False)
             return mergedDf
 
 
@@ -258,13 +258,13 @@ def filterGroundTruthPath(pathname):
 
 if (__name__ == "__main__"):
     print("Getting ground truth file...[1/4]")
-    groundTruthData = DataGatherer.gatherData(DataCleanerPosConstOffset.DATA_PATH, "traceGroundTruthJSON-7.json", DataCleanerPosConstOffset.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
+    groundTruthData = DataGatherer.gatherData(DataCleanerConstSpeedOffset.DATA_PATH, "traceGroundTruthJSON-7.json", DataCleanerConstSpeedOffset.REFINED_DATA_PATH, DataGatherer.RAW_FILE_NAME)
 
 
     print("Converting test json files to csv files and expanding columns...[2/4]")
-    populatedTestFiles = DataCleanerPosConstOffset.getPopulatedData()
+    populatedTestFiles = DataCleanerConstSpeedOffset.getPopulatedData()
     print("Cleaning data...[3/4]")
-    cleanedTestFiles = DataCleanerPosConstOffset.getCleanData()
+    cleanedTestFiles = DataCleanerConstSpeedOffset.getCleanData()
 
     print("Done!")
     print("First result:")
@@ -274,7 +274,7 @@ if (__name__ == "__main__"):
     #         print(cleanedTestFile.head(2))
 
     print("Merging... [4/4]")
-    mergedCleanedTestFiles = DataCleanerPosConstOffset.getCleanMergedDataWithoutMsgID()
+    mergedCleanedTestFiles = DataCleanerConstSpeedOffset.getCleanMergedDataWithoutMsgID()
     print("Done!")
     print(mergedCleanedTestFiles.head(5))
     print(mergedCleanedTestFiles.shape)
