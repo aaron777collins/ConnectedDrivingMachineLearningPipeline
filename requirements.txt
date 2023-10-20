@@ -28,3 +28,5 @@ EasyMLLib
 tensorflow
 pyyaml
 h5py
+lime
+shap

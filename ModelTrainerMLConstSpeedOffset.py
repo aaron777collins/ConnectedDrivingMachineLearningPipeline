@@ -31,6 +31,9 @@ from EasyMLLib.logger import Logger
 from EasyMLLib.ModelSaver import ModelSaver
 from EasyMLLib.CSVWriter import CSVWriter
 
+from lime.lime_tabular import LimeTabularExplainer
+from lime import submodular_pick
+
 from DataGatherer import DataGatherer
 
 import os
@@ -145,10 +148,10 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
 
 
 
-
         self.logger.log( f"Time elapsed: (hh:mm:ss:ms) {dt.now()-startTime}")
 
         self.logger.log( "Quick stats on features and answers for the train-val-test split")
+        self.logger.log( f"THE FEATURES ARE: {X_train.columns}" )
         Helper.quickDfArrStat([X_train, Y_train])
         Helper.quickDfArrStat([X_test, Y_test])
 
@@ -265,6 +268,23 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
             #         ] = timeElapsed.total_seconds() / len(X_test.index)
 
             self.csvWriter.addRow(row)
+
+            ##XAI STUFF HERE
+            answerList = ["isAttacker", "notAttacker"]
+            featureList = ['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX','spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg','spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg']
+
+            classifierPredictionFunction = classifier.classifier.predict_proba
+
+            explainer_lime = LimeTabularExplainer(X_train.values, feature_names = featureList, class_names= answerList, mode='classification')
+           
+            i= 47
+            exp_lime = explainer_lime.explain_instance(X_test.values[i], predict_fn=classifierPredictionFunction, num_features=len(featureList))
+
+            # exp_lime = submodular_pick.SubmodularPick(explainer_lime, X_train.values, predict_fn=classifierPredictionFunction, num_features=len(featureList), num_exps_desired=10)
+            # [exp.show_in_notebook() for exp in exp_lime.sp_explanations]
+
+            explanationHTMLpath = f'Outputs/EXPLANATION{classifier.classifier.__class__.__name__}{modelIDStr}.html'
+            exp_lime.save_to_file(explanationHTMLpath)
 
         # FEATURE TESTING CODE BELOW
 
