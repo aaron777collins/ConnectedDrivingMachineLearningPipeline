@@ -4489,3 +4489,463 @@ test-accuracy_score: 0.9610029235419454
 test-precision_score: 0.953959408682449 
 test-recall_score: 0.9559110896325389 
 test-f1_score: 0.9549261070763281 
+### 2023-11-05_16-43-04 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX        posY       spdX      spdY  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0           0  1092.277034  944.946699  13.332921  3.427861  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0           1  1275.422207  975.549673   2.118152  5.167840  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0           0  1239.044423  976.588328   9.929512  0.178527  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0           0  1257.305967  976.009156   9.939851  0.840103  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0           0  1078.728355  941.484667  13.418327  3.450198  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 22 columns] 
+(338, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker         posX        posY       spdX      spdY      aclX  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0           0  1092.277034  944.946699  13.332921  3.427861  0.817059  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0           1  1275.422207  975.549673   2.118152  5.167840  0.267790  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0           0  1239.044423  976.588328   9.929512  0.178527  0.278437  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0           0  1257.305967  976.009156   9.939851  0.840103  0.028342  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0           0  1078.728355  941.484667  13.418327  3.450198  0.371383  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.003008 
+Quick stats on features and answers for the train-val-test split 
+THE FEATURES ARE: Index(['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX',
+       'spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg',
+       'spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg'],
+      dtype='object') 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLConstSpeedOffset 
+### 2023-11-05_16-43-26 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX        posY       spdX      spdY  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0           0  1092.277034  944.946699  13.332921  3.427861  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0           1  1275.422207  975.549673   2.118152  5.167840  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0           0  1239.044423  976.588328   9.929512  0.178527  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0           0  1257.305967  976.009156   9.939851  0.840103  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0           0  1078.728355  941.484667  13.418327  3.450198  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 22 columns] 
+(338, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker         posX        posY       spdX      spdY      aclX  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0           0  1092.277034  944.946699  13.332921  3.427861  0.817059  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0           1  1275.422207  975.549673   2.118152  5.167840  0.267790  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0           0  1239.044423  976.588328   9.929512  0.178527  0.278437  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0           0  1257.305967  976.009156   9.939851  0.840103  0.028342  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0           0  1078.728355  941.484667  13.418327  3.450198  0.371383  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.003992 
+Quick stats on features and answers for the train-val-test split 
+THE FEATURES ARE: Index(['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX',
+       'spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg',
+       'spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg'],
+      dtype='object') 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLConstSpeedOffset 
+Time elapsed: (ss) 0.11999154090881348 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.11999154090881348 
+test-accuracy_score: 0.9748278083345722 
+test-precision_score: 0.967852856310949 
+test-recall_score: 0.974449890309114 
+test-f1_score: 0.9710490246532981 
+Time elapsed: (ss) 1.1040351390838623 
+train-accuracy_score: 0.9994672679518312 
+train-precision_score: 0.9993677223942758 
+train-recall_score: 0.9993789914111317 
+train-f1_score: 0.999373356658694 
+Time elapsed: (ss) 1.1040351390838623 
+test-accuracy_score: 0.6789554531490015 
+test-precision_score: 0.5850606551373458 
+test-recall_score: 0.5339754038494879 
+test-f1_score: 0.507912674250782 
+Time elapsed: (ss) 0.0029993057250976562 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.0029993057250976562 
+test-accuracy_score: 0.9652643575640454 
+test-precision_score: 0.9569137721870841 
+test-recall_score: 0.963393567759207 
+test-f1_score: 0.9600515785419582 
+### 2023-11-05_16-44-50 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX        posY       spdX      spdY  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0           0  1092.277034  944.946699  13.332921  3.427861  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0           1  1275.422207  975.549673   2.118152  5.167840  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0           0  1239.044423  976.588328   9.929512  0.178527  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0           0  1257.305967  976.009156   9.939851  0.840103  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0           0  1078.728355  941.484667  13.418327  3.450198  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 22 columns] 
+(338, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker         posX        posY       spdX      spdY      aclX  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0           0  1092.277034  944.946699  13.332921  3.427861  0.817059  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0           1  1275.422207  975.549673   2.118152  5.167840  0.267790  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0           0  1239.044423  976.588328   9.929512  0.178527  0.278437  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0           0  1257.305967  976.009156   9.939851  0.840103  0.028342  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0           0  1078.728355  941.484667  13.418327  3.450198  0.371383  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004001 
+Quick stats on features and answers for the train-val-test split 
+THE FEATURES ARE: Index(['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX',
+       'spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg',
+       'spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg'],
+      dtype='object') 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLConstSpeedOffset 
+Time elapsed: (ss) 0.11499929428100586 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.11499929428100586 
+test-accuracy_score: 0.9760665972944849 
+test-precision_score: 0.9687930269118619 
+test-recall_score: 0.9765001781538347 
+test-f1_score: 0.9725065443755622 
+Time elapsed: (ss) 1.083998441696167 
+train-accuracy_score: 0.9994672679518312 
+train-precision_score: 0.9993677223942758 
+train-recall_score: 0.9993789914111317 
+train-f1_score: 0.999373356658694 
+Time elapsed: (ss) 1.083998441696167 
+test-accuracy_score: 0.6789554531490015 
+test-precision_score: 0.5850606551373458 
+test-recall_score: 0.5339754038494879 
+test-f1_score: 0.507912674250782 
+Time elapsed: (ss) 0.001970529556274414 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.001970529556274414 
+test-accuracy_score: 0.9647192904216838 
+test-precision_score: 0.9567147771718998 
+test-recall_score: 0.9621892717262356 
+test-f1_score: 0.9593794745452315 
+### 2023-11-05_16-46-20 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX        posY       spdX      spdY  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0           0  1092.277034  944.946699  13.332921  3.427861  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0           1  1275.422207  975.549673   2.118152  5.167840  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0           0  1239.044423  976.588328   9.929512  0.178527  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0           0  1257.305967  976.009156   9.939851  0.840103  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0           0  1078.728355  941.484667  13.418327  3.450198  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 22 columns] 
+(338, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker         posX        posY       spdX      spdY      aclX  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0           0  1092.277034  944.946699  13.332921  3.427861  0.817059  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0           1  1275.422207  975.549673   2.118152  5.167840  0.267790  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0           0  1239.044423  976.588328   9.929512  0.178527  0.278437  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0           0  1257.305967  976.009156   9.939851  0.840103  0.028342  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0           0  1078.728355  941.484667  13.418327  3.450198  0.371383  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004994 
+Quick stats on features and answers for the train-val-test split 
+THE FEATURES ARE: Index(['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX',
+       'spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg',
+       'spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg'],
+      dtype='object') 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLConstSpeedOffset 
+Time elapsed: (ss) 0.1140298843383789 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.1140298843383789 
+test-accuracy_score: 0.9759179426192954 
+test-precision_score: 0.9683187630507435 
+test-recall_score: 0.9767311638155227 
+test-f1_score: 0.9723572653655808 
+Time elapsed: (ss) 1.0849933624267578 
+train-accuracy_score: 0.9994672679518312 
+train-precision_score: 0.9993677223942758 
+train-recall_score: 0.9993789914111317 
+train-f1_score: 0.999373356658694 
+Time elapsed: (ss) 1.0849933624267578 
+test-accuracy_score: 0.6789554531490015 
+test-precision_score: 0.5850606551373458 
+test-recall_score: 0.5339754038494879 
+test-f1_score: 0.507912674250782 
+Time elapsed: (ss) 0.0019996166229248047 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.0019996166229248047 
+test-accuracy_score: 0.9597641345820326 
+test-precision_score: 0.952848280326476 
+test-recall_score: 0.9540729993870416 
+test-f1_score: 0.9534570398683582 
+### 2023-11-05_16-50-33 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX        posY       spdX      spdY  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0           0  1092.277034  944.946699  13.332921  3.427861  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0           1  1275.422207  975.549673   2.118152  5.167840  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0           0  1239.044423  976.588328   9.929512  0.178527  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0           0  1257.305967  976.009156   9.939851  0.840103  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0           0  1078.728355  941.484667  13.418327  3.450198  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 22 columns] 
+(338, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker         posX        posY       spdX      spdY      aclX  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0           0  1092.277034  944.946699  13.332921  3.427861  0.817059  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0           1  1275.422207  975.549673   2.118152  5.167840  0.267790  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0           0  1239.044423  976.588328   9.929512  0.178527  0.278437  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0           0  1257.305967  976.009156   9.939851  0.840103  0.028342  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0           0  1078.728355  941.484667  13.418327  3.450198  0.371383  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.003998 
+Quick stats on features and answers for the train-val-test split 
+THE FEATURES ARE: Index(['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX',
+       'spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg',
+       'spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg'],
+      dtype='object') 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLConstSpeedOffset 
+Time elapsed: (ss) 0.11596465110778809 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.11596465110778809 
+test-accuracy_score: 0.9741836380754175 
+test-precision_score: 0.9671006913772187 
+test-recall_score: 0.9737249543694104 
+test-f1_score: 0.9703093757779746 
+Time elapsed: (ss) 1.083012342453003 
+train-accuracy_score: 0.9994672679518312 
+train-precision_score: 0.9993677223942758 
+train-recall_score: 0.9993789914111317 
+train-f1_score: 0.999373356658694 
+Time elapsed: (ss) 1.083012342453003 
+test-accuracy_score: 0.6789554531490015 
+test-precision_score: 0.5850606551373458 
+test-recall_score: 0.5339754038494879 
+test-f1_score: 0.507912674250782 
+Time elapsed: (ss) 0.002020120620727539 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.002020120620727539 
+test-accuracy_score: 0.9651652544472523 
+test-precision_score: 0.9570510992487251 
+test-recall_score: 0.9629392584158916 
+test-f1_score: 0.9599111657726282 
+### 2023-11-05_16-57-45 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX        posY       spdX      spdY  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0           0  1092.277034  944.946699  13.332921  3.427861  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0           1  1275.422207  975.549673   2.118152  5.167840  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0           0  1239.044423  976.588328   9.929512  0.178527  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0           0  1257.305967  976.009156   9.939851  0.840103  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0           0  1078.728355  941.484667  13.418327  3.450198  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 22 columns] 
+(338, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker         posX        posY       spdX      spdY      aclX  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0           0  1092.277034  944.946699  13.332921  3.427861  0.817059  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0           1  1275.422207  975.549673   2.118152  5.167840  0.267790  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0           0  1239.044423  976.588328   9.929512  0.178527  0.278437  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0           0  1257.305967  976.009156   9.939851  0.840103  0.028342  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0           0  1078.728355  941.484667  13.418327  3.450198  0.371383  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004015 
+Quick stats on features and answers for the train-val-test split 
+THE FEATURES ARE: Index(['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX',
+       'spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg',
+       'spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg'],
+      dtype='object') 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLConstSpeedOffset 
+Time elapsed: (ss) 0.11602449417114258 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.11602449417114258 
+test-accuracy_score: 0.9747782567761756 
+test-precision_score: 0.9674861660419073 
+test-recall_score: 0.9747956691553596 
+test-f1_score: 0.9710146830373072 
+Time elapsed: (ss) 1.0919978618621826 
+train-accuracy_score: 0.9994672679518312 
+train-precision_score: 0.9993677223942758 
+train-recall_score: 0.9993789914111317 
+train-f1_score: 0.999373356658694 
+Time elapsed: (ss) 1.0919978618621826 
+test-accuracy_score: 0.6789554531490015 
+test-precision_score: 0.5850606551373458 
+test-recall_score: 0.5339754038494879 
+test-f1_score: 0.507912674250782 
+Time elapsed: (ss) 0.0019998550415039062 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.0019998550415039062 
+test-accuracy_score: 0.9639760170457361 
+test-precision_score: 0.9561663632015651 
+test-recall_score: 0.9609251474035273 
+test-f1_score: 0.9584910353659006 
+### 2023-11-05_17-00-09 ### 
+Getting ground truth file...[1/4] 
+Converting test json files to csv files and expanding columns...[2/4] 
+Cleaning data...[3/4] 
+Done! 
+First result: 
+        rcvTime      sendTime  sender  senderPseudo  messageID  isAttacker         posX        posY       spdX      spdY  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0  1774107.0           0  1092.277034  944.946699  13.332921  3.427861  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0  1774981.0           1  1275.422207  975.549673   2.118152  5.167840  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0  1775497.0           0  1239.044423  976.588328   9.929512  0.178527  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0  1775597.0           0  1257.305967  976.009156   9.939851  0.840103  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0  1776004.0           0  1078.728355  941.484667  13.418327  3.450198  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 22 columns] 
+(338, 22) 
+Merging... [4/4] 
+Done! 
+        rcvTime      sendTime  sender  senderPseudo  isAttacker         posX        posY       spdX      spdY      aclX  ...      hedX      hedY  posXNeg  posYNeg  spdXNeg  spdYNeg  aclXNeg  aclYNeg  hedXNeg  hedYNeg
+0  50854.029711  50854.029711   903.0      109035.0           0  1092.277034  944.946699  13.332921  3.427861  0.817059  ...  0.999655  0.026282        0        0        1        1        0        0        1        1
+1  50854.534651  50854.534651   915.0      109155.0           1  1275.422207  975.549673   2.118152  5.167840  0.267790  ...  0.991315  0.131508        0        0        1        0        0        0        1        1
+2  50854.756328  50854.756328   921.0      109215.0           0  1239.044423  976.588328   9.929512  0.178527  0.278437  ...  0.984399  0.175953        0        0        1        1        1        1        1        0
+3  50854.757818  50854.757818   909.0      109095.0           0  1257.305967  976.009156   9.939851  0.840103  0.028342  ...  0.969921  0.243418        0        0        1        0        1        0        1        0
+4  50855.029714  50855.029714   903.0      109035.0           0  1078.728355  941.484667  13.418327  3.450198  0.371383  ...  0.999418  0.034122        0        0        1        1        1        1        1        0
+
+[5 rows x 21 columns] 
+(100897, 21) 
+Quick stats on clean, merged and sorted data 
+Getting Data Sets.. 
+Time elapsed: (hh:mm:ss:ms) 0:00:00.004008 
+Quick stats on features and answers for the train-val-test split 
+THE FEATURES ARE: Index(['rcvTime', 'sendTime', 'sender', 'senderPseudo', 'posX', 'posY', 'spdX',
+       'spdY', 'aclX', 'aclY', 'hedX', 'hedY', 'posXNeg', 'posYNeg', 'spdXNeg',
+       'spdYNeg', 'aclXNeg', 'aclYNeg', 'hedXNeg', 'hedYNeg'],
+      dtype='object') 
+Verifying the features and answers for the sets add up 
+Adding up X 
+Sum: 1.0 
+Adding up Y 
+Sum: 1.0 
+Building MLConstSpeedOffset 
+Time elapsed: (ss) 0.11600160598754883 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.11600160598754883 
+test-accuracy_score: 0.9747782567761756 
+test-precision_score: 0.9672927464183967 
+test-recall_score: 0.9750503062744278 
+test-f1_score: 0.9710289387399795 
+Time elapsed: (ss) 1.0559985637664795 
+train-accuracy_score: 0.9994672679518312 
+train-precision_score: 0.9993677223942758 
+train-recall_score: 0.9993789914111317 
+train-f1_score: 0.999373356658694 
+Time elapsed: (ss) 1.0559985637664795 
+test-accuracy_score: 0.6789554531490015 
+test-precision_score: 0.5850606551373458 
+test-recall_score: 0.5339754038494879 
+test-f1_score: 0.507912674250782 
+Time elapsed: (ss) 0.0030019283294677734 
+train-accuracy_score: 1.0 
+train-precision_score: 1.0 
+train-recall_score: 1.0 
+train-f1_score: 1.0 
+Time elapsed: (ss) 0.0030019283294677734 
+test-accuracy_score: 0.9601109954908081 
+test-precision_score: 0.9526991829812077 
+test-recall_score: 0.9551750276104315 
+test-f1_score: 0.9539222980433114 

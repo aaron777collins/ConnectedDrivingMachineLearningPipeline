@@ -352,6 +352,8 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
         #Print out shap values for others 
         shap.summary_plot(shap_values=shap_values, features=features.head(howManyRows), class_names=['Is Attacker', 'Is Not Attacker'])
 
+        shap.summary_plot(shap_values=shap_values[0], features=features.head(howManyRows), class_names=['Is Attacker', 'Is Not Attacker'], plot_type="bar")
+
         shap.summary_plot(shap_values[0], X_test.head(howManyRows), plot_type="dot")
 
         expectedValue = explainer.expected_value
