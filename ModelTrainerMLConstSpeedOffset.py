@@ -339,7 +339,8 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
         print(X_test.head())
         print(X_test.head())
 
-        shap_values = explainer.shap_values(X_test.head())
+        howManyRows = 400
+        shap_values = explainer.shap_values(X_test.head(howManyRows))
 
         object_type4 = type(shap_values)
         print("The type of shap_values is:", object_type4)
@@ -348,10 +349,13 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
         print(features.head())
         print("The type of features is:", object_type5)
 
-        shap.summary_plot(shap_values=shap_values, features=features.head())
+        #Print out shap values for others 
+        shap.summary_plot(shap_values=shap_values, features=features.head(howManyRows), class_names=['Is Attacker', 'Is Not Attacker'])
 
+        shap.summary_plot(shap_values[0], X_test.head(howManyRows), plot_type="dot")
 
-
+        expectedValue = explainer.expected_value
+        shap.decision_plot(expectedValue[0], shap_values[0], X_test.columns) # type: ignore
 
         
 if __name__ == "__main__":
