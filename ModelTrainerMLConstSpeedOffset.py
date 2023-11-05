@@ -1,3 +1,5 @@
+# %%
+
 from cgi import test
 from datetime import datetime as dt
 import os.path as path
@@ -24,7 +26,8 @@ from sklearn.metrics import f1_score
 from EasyMLLib.helper import Helper
 from DataCleanerConstSpeedOffset import DataCleanerConstSpeedOffset
 from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier, StackingClassifier
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 from EasyMLLib.DataSplitter import DataSplitter
 from EasyMLLib.logger import Logger
@@ -33,6 +36,8 @@ from EasyMLLib.CSVWriter import CSVWriter
 
 from lime.lime_tabular import LimeTabularExplainer
 from lime import submodular_pick
+
+import shap
 
 from DataGatherer import DataGatherer
 
@@ -206,8 +211,6 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
         results = mPipeline.calc_classifier_results().get_classifier_results()
 
         for classifier,result in results:
-            
-            
 
             row = [" "] * len(CSV_COLUMNS)
             row[CSV_FORMAT["Model"]] = classifier.classifier.__class__.__name__
@@ -286,6 +289,20 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
             explanationHTMLpath = f'Outputs/EXPLANATION{classifier.classifier.__class__.__name__}{modelIDStr}.html'
             exp_lime.save_to_file(explanationHTMLpath)
 
+         
+            #Shap stuff
+
+            #shap.initjs()
+
+            # exp_shap = shap.TreeExplainer(skLearnClassifierObj)
+
+            # shap_values = exp_shap.shap_values(X_train)
+
+            #shapImagePath = f'Outputs/shap_summary_{classifier.classifier.__class__.__name__}.pdf'
+            # shap.force_plot(exp_shap, shap_values, X_train, matplotlib=True)
+            # plt.savefig(f"sample.jpg", bbox_inches='tight')
+
+
         # FEATURE TESTING CODE BELOW
 
             # get importance
@@ -304,7 +321,41 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
             # #plt.show()
             # plt.savefig(path.join("Figures", "feature-test-"+ classifierNames[i] +"-"+ datetime.now().strftime(R"%m-%d-%Y, %H-%M-%S") + ".png"), format='png', dpi=200)
 
+        randomForestC = results[0][0].classifier
+        
+        object_type = type(randomForestC)
+        print("The type of randomForestC is:", object_type)
+
+        shap.initjs()
+
+        explainer = shap.TreeExplainer(randomForestC)
+
+        object_type2 = type(explainer)
+        print("The type of explainer is:", object_type2)
+
+        object_type3 = type(X_test)
+        print("The type of X_test is:", object_type3)
+
+        print(X_test.head())
+        print(X_test.head())
+
+        shap_values = explainer.shap_values(X_test.head())
+
+        object_type4 = type(shap_values)
+        print("The type of shap_values is:", object_type4)
+
+        object_type5 = type(features)
+        print(features.head())
+        print("The type of features is:", object_type5)
+
+        shap.summary_plot(shap_values=shap_values, features=features.head())
 
 
+
+
+        
 if __name__ == "__main__":
     ModelTrainerMLSpeedOffsetConstSCSortedByTime().main()
+
+
+# %%

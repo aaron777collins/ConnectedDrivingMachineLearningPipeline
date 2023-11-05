@@ -18,6 +18,9 @@ class MClassifierPipeline:
             self.classifiers.append(
                 MDataClassifier(classifier_instance, train_X, train_Y, test_X, test_Y))
 
+    def getClassifiers(self):
+        return self.classifiers
+
     def train(self):
         for mClassifier in self.classifiers:
             mClassifier.train()
@@ -41,5 +44,6 @@ class MClassifierPipeline:
 
     def get_classifier_results(self):
         return self.results
+
 
 

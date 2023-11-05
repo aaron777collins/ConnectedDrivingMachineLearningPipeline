@@ -30,3 +30,6 @@ pyyaml
 h5py
 lime
 shap
+ipython
+jupyter
+ipywidgets
