@@ -5,6 +5,7 @@ from datetime import datetime as dt
 import os.path as path
 from pathlib import Path
 from typing import Tuple
+from xml.sax.handler import feature_string_interning
 
 import numpy as np
 import pandas as pd
@@ -289,19 +290,6 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
             explanationHTMLpath = f'Outputs/EXPLANATION{classifier.classifier.__class__.__name__}{modelIDStr}.html'
             exp_lime.save_to_file(explanationHTMLpath)
 
-         
-            #Shap stuff
-
-            #shap.initjs()
-
-            # exp_shap = shap.TreeExplainer(skLearnClassifierObj)
-
-            # shap_values = exp_shap.shap_values(X_train)
-
-            #shapImagePath = f'Outputs/shap_summary_{classifier.classifier.__class__.__name__}.pdf'
-            # shap.force_plot(exp_shap, shap_values, X_train, matplotlib=True)
-            # plt.savefig(f"sample.jpg", bbox_inches='tight')
-
 
         # FEATURE TESTING CODE BELOW
 
@@ -359,6 +347,64 @@ class ModelTrainerMLSpeedOffsetConstSCSortedByTime:
         expectedValue = explainer.expected_value
         shap.decision_plot(expectedValue[0], shap_values[0], X_test.columns) # type: ignore
 
+        self.logger.log("SHAP VALUES FOR RANDOM \n \n \n \n ")
+
+        rf_resultX2 = pd.DataFrame(shap_values[0], columns = featureList) # type: ignore
+        vals2 = np.abs(rf_resultX2.values).mean(0)
+        shap_importance2 = pd.DataFrame(list(zip(featureList, vals2)), columns=['col_name','feature_importance_vals']) # type: ignore
+        shap_importance2.sort_values(by=['feature_importance_vals'],ascending=False, inplace=True)
+        shap_importance2.head(25)
+
+        self.logger.log( shap_importance2.head(25)) # type: ignore
+        #DecisionTree classifier 
+
+        decisionTreeC = results[2][0].classifier
+        
+        object_type = type(decisionTreeC)
+        print("The type of randomForestC is:", object_type)
+
+        shap.initjs()
+
+        explainerDec = shap.TreeExplainer(decisionTreeC)
+
+        object_type2 = type(explainerDec)
+        print("The type of explainer is:", object_type2)
+
+        object_type3 = type(X_test)
+        print("The type of X_test is:", object_type3)
+
+        print(X_test.head())
+        print(X_test.head())
+
+        howManyRows = 400
+        shap_values_dec = explainerDec.shap_values(X_test.head(howManyRows))
+
+        object_type4 = type(shap_values_dec)
+        print("The type of shap_values is:", object_type4)
+
+        object_type5 = type(features)
+        print(features.head())
+        print("The type of features is:", object_type5)
+
+        #Print out shap values for others 
+        shap.summary_plot(shap_values=shap_values_dec, features=features.head(howManyRows), class_names=['Is Attacker', 'Is Not Attacker'])
+
+        shap.summary_plot(shap_values=shap_values_dec[0], features=features.head(howManyRows), class_names=['Is Attacker', 'Is Not Attacker'], plot_type="bar")
+
+        shap.summary_plot(shap_values_dec[0], X_test.head(howManyRows), plot_type="dot")
+
+        expectedValueDec = explainerDec.expected_value
+        shap.decision_plot(expectedValueDec[0], shap_values_dec[0], X_test.columns) # type: ignore
+
+        self.logger.log("SHAP VALUES FOR DecisionTree \n \n \n \n ")
+
+        rf_resultX = pd.DataFrame(shap_values_dec[0], columns = featureList) # type: ignore
+        vals = np.abs(rf_resultX.values).mean(0)
+        shap_importance = pd.DataFrame(list(zip(featureList, vals)), columns=['col_name','feature_importance_vals']) # type: ignore
+        shap_importance.sort_values(by=['feature_importance_vals'],ascending=False, inplace=True)
+        shap_importance.head(25)
+
+        self.logger.log( shap_importance.head(25)) # type: ignore
         
 if __name__ == "__main__":
     ModelTrainerMLSpeedOffsetConstSCSortedByTime().main()
